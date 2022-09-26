@@ -11,7 +11,7 @@ const NavBar = () => {
     <>
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">Competencias CADDA</Navbar.Brand>
+        <NavLink to='/'>Futuros eventos</NavLink>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -20,7 +20,7 @@ const NavBar = () => {
             navbarScroll
           >
             <Nav.Link href="#action1">Mi cuenta</Nav.Link>
-            <NavLink to='/table'>Eventos</NavLink>
+            <NavLink to='/table'>Resultados</NavLink>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
