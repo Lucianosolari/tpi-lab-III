@@ -1,14 +1,26 @@
-// import React, { useState } from 'react'
-import Swimmer from './Swimmer';
+import React from "react";
+import DataGrid from "react-data-grid";
 
-export default function Table({swimmer}) {
-    // const [swimmerList, setSwimmerList] = useState();
+const Table = () => {
+  const columns = [
+    { key: "id", name: "NUMERO NADADOR" },
+    { key: "name", name: "NOMBRE" },
+    { key: "category", name: "CATEGORIA" },
+    { key: "ranking", name: "CLASIFICACIÓN" },
+  ];
+
+  const rows = [
+    { id: 0, name: "Lucho", category: "Junior", ranking: "10" },
+    { id: 1, name: "Santiago", category: "Pro", ranking: "1" },
+    { id: 2, name: "Manuel", category: "Junior", ranking: "158" },
+    { id: 3, name: "Matias", category: "Junior", ranking: "-81" },
+  ];
 
   return (
-    <>
-        <ul>
-            <Swimmer swimmer={swimmer} />
-        </ul>
-    </>
-  )
-}
+    <div>
+      <DataGrid columns={columns} rows={rows} />
+    </div>
+  );
+};
+
+export default Table;
