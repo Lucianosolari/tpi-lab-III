@@ -42,7 +42,7 @@ const Login = () => {
 
                     <p class="small mb-5 pb-lg-2">
                       <a class="text-white-50" href="#!">
-                        ¿Olvidaste tu contraseña?
+                        ¿Olvidó su contraseña?
                       </a>
                     </p>
 
@@ -68,7 +68,7 @@ const Login = () => {
 
                   <div>
                     <p class="mb-0">
-                      ¿No tienes una cuenta?{" "}
+                      ¿No tiene una cuenta?{" "}
                       <Link class="text-white-50 fw-bold" to="signup">
                         Crear cuenta
                       </Link>

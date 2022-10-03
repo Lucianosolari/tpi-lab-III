@@ -23,7 +23,7 @@ export const SignUp = () => {
                               class="form-control"
                             />
                             <label class="form-label" for="form3Example1">
-                              First name
+                              Nombre
                             </label>
                           </div>
                         </div>
@@ -35,7 +35,7 @@ export const SignUp = () => {
                               class="form-control"
                             />
                             <label class="form-label" for="form3Example2">
-                              Last name
+                              Apellido
                             </label>
                           </div>
                         </div>
@@ -48,7 +48,7 @@ export const SignUp = () => {
                           class="form-control"
                         />
                         <label class="form-label" for="form3Example3">
-                          Email address
+                          Email
                         </label>
                       </div>
 
@@ -59,7 +59,7 @@ export const SignUp = () => {
                           class="form-control"
                         />
                         <label class="form-label" for="form3Example4">
-                          Password
+                          Contraseña
                         </label>
                       </div>
                       <div class="form-check d-flex justify-content-center mb-4">
