@@ -13,6 +13,8 @@ const NavBar = () => {
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <NavLink to="/">Futuros eventos</NavLink>
+          <NavLink to="/login">Mi cuenta</NavLink>
+          <NavLink to="/table">Resultados</NavLink>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -20,8 +22,6 @@ const NavBar = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <NavLink to="/login">Mi cuenta</NavLink>
-              <NavLink to="/table">Resultados</NavLink>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
