@@ -12,13 +12,17 @@ import {
 
 import { AuthProvider } from "./context/AuthContext";
 import NewUser from "./user/NewUser";
+import FutureEvents from "./components/FutureEvents/FutureEvents";
+import CreateEvents from "./CreateEvents/CreateEvents";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<NavBar />}>
+      <Route path="/future-events" element={<FutureEvents/>}/>
       <Route path="/table" element={<Table />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login/newuser" element={<NewUser />} />
+      <Route path="/add-event" element={<CreateEvents/>} />
     </Route>
   )
 );
