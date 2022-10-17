@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext";
 
 const Login = () => {
   return (

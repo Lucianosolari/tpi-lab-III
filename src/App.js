@@ -9,20 +9,26 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { SignUp } from "./components/SignUp/SignUp";
+
+import { AuthProvider } from "./context/AuthContext";
+import NewUser from "./user/NewUser";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<NavBar />}>
       <Route path="/table" element={<Table />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/login/signup" element={<SignUp />} />
+      <Route path="/login/newuser" element={<NewUser />} />
     </Route>
   )
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

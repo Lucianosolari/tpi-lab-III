@@ -1,7 +1,43 @@
+import { useState, useRef } from "react";
+import { useAuth } from "../../context/AuthContext";
 import "./SignUp.css";
-import React from "react";
 
-export const SignUp = () => {
+const SignUp = ({ onAddUser, value }) => {
+  console.log(value);
+  console.log(onAddUser);
+
+  /*const [user, setUser] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+  });*/
+
+  //const { signUp } = useAuth();
+
+  /* const handleChange = (event) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };*/
+  const [isEntering, setIsEntering] = useState(false);
+  const nameInputRef = useRef();
+  const surnameInputRef = useRef();
+  const emailInputRef = useRef();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    //signUp(user.email, user.password);
+
+    const enteredName = nameInputRef.current.value;
+    const enteredSurname = surnameInputRef.current.value;
+    const enteredEmail = emailInputRef.current.value;
+
+    onAddUser({
+      name: enteredName,
+      surname: enteredSurname,
+      emai: enteredEmail,
+    });
+  }
+
   return (
     <>
       <section class="vh-100 gradient-custom">
@@ -13,16 +49,23 @@ export const SignUp = () => {
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card bg-dark text-white">
                   <div class="card-body py-5 px-md-5">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <input
                               type="text"
-                              id="form3Example1"
+                              id="name"
+                              name="name"
                               class="form-control"
+                              //onChange={handleChange}
+                              ref={nameInputRef}
                             />
-                            <label class="form-label" for="form3Example1">
+                            <label
+                              class="form-label"
+                              for="form3Example1"
+                              htmlFor="name"
+                            >
                               Nombre
                             </label>
                           </div>
@@ -31,10 +74,17 @@ export const SignUp = () => {
                           <div class="form-outline">
                             <input
                               type="text"
-                              id="form3Example2"
+                              id="surname"
+                              name="surname"
                               class="form-control"
+                              //onChange={handleChange}
+                              ref={surnameInputRef}
                             />
-                            <label class="form-label" for="form3Example2">
+                            <label
+                              class="form-label"
+                              for="form3Example2"
+                              htmlFor="surname"
+                            >
                               Apellido
                             </label>
                           </div>
@@ -44,10 +94,17 @@ export const SignUp = () => {
                       <div class="form-outline mb-4">
                         <input
                           type="email"
-                          id="form3Example3"
+                          name="email"
+                          id="email"
                           class="form-control"
+                          //onChange={handleChange}
+                          ref={emailInputRef}
                         />
-                        <label class="form-label" for="form3Example3">
+                        <label
+                          class="form-label"
+                          for="form3Example3"
+                          htmlFor="email"
+                        >
                           Email
                         </label>
                       </div>
@@ -55,8 +112,10 @@ export const SignUp = () => {
                       <div class="form-outline mb-4">
                         <input
                           type="password"
-                          id="form3Example4"
+                          id="password"
+                          name="password"
                           class="form-control"
+                          //onChange={handleChange}
                         />
                         <label class="form-label" for="form3Example4">
                           Contraseña
@@ -81,3 +140,5 @@ export const SignUp = () => {
     </>
   );
 };
+
+export default SignUp;
