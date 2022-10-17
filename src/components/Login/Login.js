@@ -71,7 +71,7 @@ const Login = () => {
                   <div>
                     <p class="mb-0">
                       ¿No tiene una cuenta?{" "}
-                      <Link class="text-white-50 fw-bold" to="signup">
+                      <Link class="text-white-50 fw-bold" to="newuser">
                         Crear cuenta
                       </Link>
                     </p>
