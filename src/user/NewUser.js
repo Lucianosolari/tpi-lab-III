@@ -19,7 +19,7 @@ const NewUser = () => {
     sendRequest(quoteData);
   };
 
-  return <SignUp onAddUser={addUserHandler} value={13} />;
+  return <SignUp onAddUser={addUserHandler} />;
 };
 
 export default NewUser;
