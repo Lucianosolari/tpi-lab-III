@@ -54,3 +54,20 @@ export async function addUser(quoteData) {
 
   return null;
 }
+
+export async function addEvent(quoteData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event.json`, {
+    method: "POST",
+    body: JSON.stringify(quoteData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not create user.");
+  }
+
+  return null;
+}
