@@ -1,25 +1,25 @@
 const FIREBASE_DOMAIN = "https://db-lab-7ec57-default-rtdb.firebaseio.com/";
 
-export async function getAllQuotes() {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
+export async function getAllEvents() {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event.json`);
   const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data.message || "Could not fetch quotes.");
   }
 
-  const transformedQuotes = [];
+  const transformedEvents = [];
 
   for (const key in data) {
-    const quoteObj = {
+    const eventObj = {
       id: key,
       ...data[key],
     };
 
-    transformedQuotes.push(quoteObj);
+    transformedEvents.push(eventObj);
   }
 
-  return transformedQuotes;
+  return transformedEvents;
 }
 
 export async function getSingleQuote(quoteId) {

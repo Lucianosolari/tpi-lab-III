@@ -8,6 +8,7 @@ const FutureEvents = () => {
         <h2>Título</h2>
         <p>Organiza</p>
         <p>Ubicación</p>
+        <button type="button">Inscribirme</button>
     </EventsCard>
   )
 }
