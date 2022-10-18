@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { useState, useRef } from "react";
 import { useAuth } from "../../context/AuthContext";
 import "./SignUp.css";
@@ -31,6 +32,7 @@ const SignUp = ({ onAddUser }) => {
     const enteredPassword = passwordInputRef.current.value;
 
     onAddUser({
+      role: "user",
       name: enteredName,
       surname: enteredSurname,
       email: enteredEmail,
