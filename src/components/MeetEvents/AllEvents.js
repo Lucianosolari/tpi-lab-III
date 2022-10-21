@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import EventsList from '../components/quotes/QuoteList';
 // import LoadingSpinner from '../components/UI/LoadingSpinner';
 // import NoQuotesFound from '../components/quotes/NoQuotesFound';
-import useHttp from '../hooks/use-http';
-import { getAllEvents } from '../lib/api';
+import useHttp from "../../hooks/use-http";
+import { getAllEvents } from "../../lib/api";
+import EventsList from "./EventsList";
 
 const AllEvents = () => {
-  const { sendRequest, status, data: loadedQuotes, error } = useHttp(
-    getAllEvents,
-    true
-  );
-
+  const {
+    sendRequest,
+    status,
+    data: loadedQuotes,
+    error,
+  } = useHttp(getAllEvents, true);
+  console.log(loadedQuotes);
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -24,17 +26,15 @@ const AllEvents = () => {
   //   );
   // }
 
-  if (status === 'pending') {
-    return (
-      <p>Cargando...</p>
-    );
+  if (status === "pending") {
+    return <p>Cargando...</p>;
   }
 
   if (error) {
-    return <p className='centered focused'>{error}</p>;
+    return <p className="centered focused">{error}</p>;
   }
 
-  if (status === 'completed' && (!loadedQuotes || loadedQuotes.length === 0)) {
+  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
     return <p>Página no encontrada</p>;
   }
 

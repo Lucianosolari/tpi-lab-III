@@ -1,16 +1,20 @@
-import React from 'react'
-import EventsCard from '../EventsCard/EventsCard'
+import React from "react";
+import { Link } from "react-router-dom";
+import EventsCard from "../EventsCard/EventsCard";
 
-const FutureEvents = () => {
+const FutureEvents = ({ id, date, title, organizer, location }) => {
   return (
-    <EventsCard>
-        <p>Fecha</p>
-        <h2>Título</h2>
-        <p>Organiza</p>
-        <p>Ubicación</p>
-        <button type="button">Inscribirme</button>
-    </EventsCard>
-  )
-}
+    <>
+      <EventsCard>
+        <p>{date}</p>
+        <h2>{title}</h2>
+        <p>{organizer}</p>
+        <p>{location}</p>
 
-export default FutureEvents
+        <button type="button">Inscribirme</button>
+      </EventsCard>
+    </>
+  );
+};
+
+export default FutureEvents;

@@ -8,7 +8,7 @@ const NavBar = () => {
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <NavLink to="/future-events">Futuros eventos</NavLink>
+          <NavLink to="/events">Futuros eventos</NavLink>
           <NavLink to="/login">Mi cuenta</NavLink>
           <NavLink to="/table">Resultados</NavLink>
         </Container>
