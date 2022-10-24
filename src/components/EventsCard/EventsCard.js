@@ -1,5 +1,4 @@
 import React from "react";
-import EventList from "../MeetEvents/EventsList";
 import "./EventsCard.css";
 
 const EventsCard = ({ children }) => {

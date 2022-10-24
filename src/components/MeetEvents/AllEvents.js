@@ -10,10 +10,10 @@ const AllEvents = () => {
   const {
     sendRequest,
     status,
-    data: loadedQuotes,
+    data: loadedEvents,
     error,
   } = useHttp(getAllEvents, true);
-  console.log(loadedQuotes);
+
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -34,11 +34,11 @@ const AllEvents = () => {
     return <p className="centered focused">{error}</p>;
   }
 
-  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
+  if (status === "completed" && (!loadedEvents || loadedEvents.length === 0)) {
     return <p>Página no encontrada</p>;
   }
 
-  return <EventsList quotes={loadedQuotes} />;
+  return <EventsList events={loadedEvents} />;
 };
 
 export default AllEvents;

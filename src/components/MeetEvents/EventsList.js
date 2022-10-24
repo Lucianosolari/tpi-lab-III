@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import FutureEvents from "./FutureEvents";
 
-const EventList = ({ quotes }) => {
+const EventList = ({ events }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,13 +24,13 @@ const EventList = ({ quotes }) => {
         </button>
       </div>
       <ul>
-        {quotes.map((quote) => (
+        {events.map((meet) => (
           <FutureEvents
-            key={quote.id}
-            date={quote.date}
-            title={quote.title}
-            organizer={quote.organizer}
-            location={quote.location}
+            key={meet.id}
+            date={meet.date}
+            title={meet.title}
+            organizer={meet.organizer}
+            location={meet.location}
           />
         ))}
       </ul>
