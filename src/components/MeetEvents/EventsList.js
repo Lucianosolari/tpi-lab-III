@@ -10,30 +10,21 @@ const EventList = ({ events }) => {
 
   const isSortingAscending = queryParams.get("sort") === "asc";
 
-  const changeSortingHandler = () => {
-    navigate(location.pathname, {
-      search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
-    });
-  };
-
   return (
     <Fragment>
-      <div>
-        <button onClick={changeSortingHandler}>
-          Sort {isSortingAscending ? "Descending" : "Ascending"}
-        </button>
-      </div>
-      <ul>
-        {events.map((meet) => (
-          <FutureEvents
-            key={meet.id}
-            date={meet.date}
-            title={meet.title}
-            organizer={meet.organizer}
-            location={meet.location}
-          />
-        ))}
-      </ul>
+      <section className="gradient-custom row d-flex justify-content-center align-items-center h-100">
+        <ul>
+          {events.map((meet) => (
+            <FutureEvents
+              key={meet.id}
+              date={meet.date}
+              title={meet.title}
+              organizer={meet.organizer}
+              location={meet.location}
+            />
+          ))}
+        </ul>
+      </section>
     </Fragment>
   );
 };
