@@ -1,19 +1,14 @@
 import { Fragment } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+
+import './EventsList.css'
+
 import FutureEvents from "./FutureEvents";
 
 const EventList = ({ events }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const queryParams = new URLSearchParams(location.search);
-
-  const isSortingAscending = queryParams.get("sort") === "asc";
-
   return (
     <Fragment>
       <section className="gradient-custom row d-flex justify-content-center align-items-center h-100">
-        <ul>
+        <ul className="events-list">
           {events.map((meet) => (
             <FutureEvents
               key={meet.id}

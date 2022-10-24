@@ -5,7 +5,7 @@ export async function getAllEvents() {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch quotes.");
+    throw new Error(data.message || "Could not fetch events.");
   }
 
   const transformedEvents = [];
