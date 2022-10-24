@@ -1,6 +1,6 @@
-// import userEvent from "@testing-library/user-event";
-import { useRef } from "react";
-// import { useAuth } from "../../context/AuthContext";
+import userEvent from "@testing-library/user-event";
+import { useRef, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import "./SignUp.css";
 
 const SignUp = ({ onAddUser }) => {
@@ -15,7 +15,6 @@ const SignUp = ({ onAddUser }) => {
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
-
   };
 
   const [isEntering, setIsEntering] = useState(false);
