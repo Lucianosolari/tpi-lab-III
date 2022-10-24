@@ -2,7 +2,7 @@ import React from "react";
 import "./EventsCard.css";
 
 const EventsCard = ({ children }) => {
-  return <div className="future-events-container">{children}</div>;
+  return <li className="future-events-container">{children}</li>;
 };
 
 export default EventsCard;
