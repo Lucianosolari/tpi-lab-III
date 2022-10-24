@@ -4,18 +4,19 @@ import { useAuth } from "../../context/AuthContext";
 import "./SignUp.css";
 
 const SignUp = ({ onAddUser }) => {
-  /*const [user, setUser] = useState({
+  const [user, setUser] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
-  });*/
+  });
 
-  //const { signUp } = useAuth();
+  const { signUp } = useAuth();
 
-  /* const handleChange = (event) => {
+  const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
-  };*/
+  };
+
   const [isEntering, setIsEntering] = useState(false);
   const nameInputRef = useRef();
   const surnameInputRef = useRef();
@@ -24,7 +25,7 @@ const SignUp = ({ onAddUser }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    //signUp(user.email, user.password);
+    signUp(user.email, user.password);
 
     const enteredName = nameInputRef.current.value;
     const enteredSurname = surnameInputRef.current.value;
@@ -91,7 +92,7 @@ const SignUp = ({ onAddUser }) => {
                           name="email"
                           id="email"
                           className="form-control"
-                          //onChange={handleChange}
+                          onChange={handleChange}
                           ref={emailInputRef}
                         />
                         <label className="form-label" htmlFor="email">
@@ -106,7 +107,7 @@ const SignUp = ({ onAddUser }) => {
                           name="password"
                           className="form-control"
                           ref={passwordInputRef}
-                          //onChange={handleChange}
+                          onChange={handleChange}
                         />
                         <label className="form-label" htmlFor="password">
                           Contraseña
