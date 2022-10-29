@@ -16,7 +16,7 @@ import NewUser from "./user/NewUser";
 import CreateEvents from "./CreateEvents/CreateEvents";
 
 import AllEvents from "./components/MeetEvents/AllEvents";
-import FutureEvents from "./components/MeetEvents/FutureEvents";
+import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/login/newuser" element={<NewUser />} />
       <Route path="/add-event" element={<CreateEvents />} />
+      <Route path="load-swimmer" element={<LoadSwimmer/>} />
 
       <Route path="/events/" element={<AllEvents />} />
     </Route>
