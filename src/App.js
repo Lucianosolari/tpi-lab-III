@@ -26,7 +26,6 @@ const router = createBrowserRouter(
       <Route path="/login/newuser" element={<NewUser />} />
       <Route path="/add-event" element={<CreateEvents />} />
       <Route path="load-swimmer" element={<LoadSwimmer/>} />
-
       <Route path="/events" element={<AllEvents />} />
     </Route>
   )
