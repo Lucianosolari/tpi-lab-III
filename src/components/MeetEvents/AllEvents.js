@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 // import LoadingSpinner from '../components/UI/LoadingSpinner';
 // import NoQuotesFound from '../components/quotes/NoQuotesFound';
@@ -7,6 +8,7 @@ import { getAllEvents } from "../../lib/api";
 import EventsList from "./EventsList";
 
 const AllEvents = () => {
+  const {user} = useAuth();
   const {
     sendRequest,
     status,
@@ -26,6 +28,8 @@ const AllEvents = () => {
   //   );
   // }
 
+  const {loading} = useAuth();
+
   if (status === "pending") {
     return <p>Cargando...</p>;
   }
@@ -38,7 +42,15 @@ const AllEvents = () => {
     return <p>Página no encontrada</p>;
   }
 
-  return <EventsList events={loadedEvents} />;
+  if (loading) return <h1>Cargando...</h1>
+
+  return (
+    <>
+      {user && <h2>Bienvenido {user.email}, disfrute la página!!</h2>}
+      <EventsList events={loadedEvents} />;
+    </>
+  )
+  
 };
 
 export default AllEvents;
