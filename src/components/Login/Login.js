@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
-import 'firebase/auth'
-import {UseFirebaseApp} from 'reactfire';
+// import 'firebase/auth';
+// import { useFirebaseApp, useAuth } from "reactfire";
+
 
 import "./Login.css";
+
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
@@ -12,13 +14,16 @@ const Login = () => {
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
-  const login = () => {
-    
+  const changeEmailHandler = (event) => {
+    setLoginEmail(event.target.value);
+  }
+
+  const changePasswordHandler = (event) => {
+    setLoginPassword(event.target.value)
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    login();
+    event.preventDefault();
   }
 
   return (
@@ -45,6 +50,8 @@ const Login = () => {
                           type="email"
                           id="typeEmailX"
                           className="form-control form-control-lg"
+                          onChange={changeEmailHandler}
+                          value={loginEmail}
                           ref={loginEmailRef}
                         />
                         <label className="form-label" htmlFor="typeEmailX">
@@ -57,6 +64,8 @@ const Login = () => {
                           type="password"
                           id="typePasswordX"
                           className="form-control form-control-lg"
+                          onChange={changePasswordHandler}
+                          value={loginPassword}
                           ref={loginPasswordRef}
                         />
                         <label className="form-label" htmlFor="typePasswordX">
