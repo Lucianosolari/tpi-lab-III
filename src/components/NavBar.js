@@ -12,16 +12,19 @@ const NavBar = () => {
     await logout();
     navigate('/login');
   }
+  const loginHandler = async () => {
+    navigate('/login');
+  }
 
-  if (loading) return <h1>Cargando...</h1>
+  if (loading) return <h1>Cargando página principal...</h1>
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <NavLink to="/events">Futuros eventos</NavLink>
-          {!user && <NavLink to="/login">Iniciar sesión</NavLink>}
           <NavLink to="/table">Resultados</NavLink>
-          <Button onClick={logoutHandler}>Cerrar sesión</Button>
+          {!user && <Button onClick={loginHandler}>Iniciar sesión</Button>}
+          {user && <Button onClick={logoutHandler}>Cerrar sesión</Button>}
         </Container>
       </Navbar>
       <main>

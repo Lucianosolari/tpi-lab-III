@@ -17,16 +17,34 @@ import CreateEvents from "./components/CreateEvents/CreateEvents";
 
 import AllEvents from "./components/MeetEvents/AllEvents";
 import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<NavBar />}>
-      <Route path="/table" element={<Table />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login/newuser" element={<NewUser />} />
-      <Route path="/add-event" element={<CreateEvents />} />
-      <Route path="load-swimmer" element={<LoadSwimmer/>} />
-      <Route path="/events" element={<AllEvents />} />
+      
+      <Route path="/table" element={
+      <ProtectedRoute>
+        <Table />
+      </ProtectedRoute>
+      } />
+      <Route path="/add-event" element={
+      <ProtectedRoute>
+        <CreateEvents />
+      </ProtectedRoute>
+      } />
+      <Route path="load-swimmer" element={
+      <ProtectedRoute>
+        <LoadSwimmer/>
+      </ProtectedRoute>
+      } />
+      <Route path="/events" element={
+      <ProtectedRoute>
+        <AllEvents />
+      </ProtectedRoute>
+      } />
     </Route>
   )
 );

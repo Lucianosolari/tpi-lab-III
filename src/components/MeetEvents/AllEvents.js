@@ -31,7 +31,7 @@ const AllEvents = () => {
   const {loading} = useAuth();
 
   if (status === "pending") {
-    return <p>Cargando...</p>;
+    return <p>Cargando eventos...</p>;
   }
 
   if (error) {
@@ -39,14 +39,14 @@ const AllEvents = () => {
   }
 
   if (status === "completed" && (!loadedEvents || loadedEvents.length === 0)) {
-    return <p>Página no encontrada</p>;
+    return <p>No hay eventos</p>;
   }
 
   if (loading) return <h1>Cargando...</h1>
 
   return (
     <>
-      {user && <h2>Bienvenido {user.email}, disfrute la página!!</h2>}
+      <h2>Bienvenido {user.email}, disfrute la página!!</h2>
       <EventsList events={loadedEvents} />;
     </>
   )
