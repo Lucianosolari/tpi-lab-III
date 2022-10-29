@@ -1,30 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-// import 'firebase/auth';
-// import { useFirebaseApp, useAuth } from "reactfire";
 
 
 import "./Login.css";
+import { useAuth } from "../../context/AuthContext";
 
 
 const Login = () => {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
-  const changeEmailHandler = (event) => {
-    setLoginEmail(event.target.value);
-  }
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const changePasswordHandler = (event) => {
-    setLoginPassword(event.target.value)
-  }
+  const handleChange = (event) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setError('');
+    try {
+      await login(user.email, user.password);
+      navigate('/events');
+  } catch (error) {
+    console.log(error)
+    if (!user.email){
+      setError('Ingrese un mail.')
+    }
+    if (!user.password){
+      setError('Ingrese la contraseña.')
+    }
+    if (error.code === 'auth/user-not-found'){
+      setError('Correo no registrado.')
+    }
+    if (error.code === 'auth/wrong-password'){
+      setError('Contraseña incorrecta.')
+    }
   }
+  }
+  
 
   return (
     <>
@@ -48,13 +69,13 @@ const Login = () => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="email"
-                          id="typeEmailX"
+                          id="email"
+                          name="email"
                           className="form-control form-control-lg"
-                          onChange={changeEmailHandler}
-                          value={loginEmail}
                           ref={loginEmailRef}
+                          onChange={handleChange}
                         />
-                        <label className="form-label" htmlFor="typeEmailX">
+                        <label className="form-label" htmlFor="email">
                           Email
                         </label>
                       </div>
@@ -62,22 +83,16 @@ const Login = () => {
                       <div className="form-outline form-white mb-4">
                         <input
                           type="password"
-                          id="typePasswordX"
+                          id="password"
+                          name="password"
                           className="form-control form-control-lg"
-                          onChange={changePasswordHandler}
-                          value={loginPassword}
                           ref={loginPasswordRef}
+                          onChange={handleChange}
                         />
-                        <label className="form-label" htmlFor="typePasswordX">
+                        <label className="form-label" htmlFor="password">
                           Contraseña
                         </label>
                       </div>
-
-                      <p className="small mb-5 pb-lg-2">
-                        <a className="text-white-50" href="#!">
-                          ¿Olvidó su contraseña?
-                        </a>
-                      </p>
 
                       <button
                         className="btn btn-outline-light btn-lg px-5"
@@ -85,17 +100,8 @@ const Login = () => {
                       >
                         Ingresar
                       </button>
-
-                      <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                        <a href="#!" className="text-white">
-                          <i className="fab fa-facebook-f fa-lg"></i>
-                        </a>
-                        <a href="#!" className="text-white">
-                          <i className="fab fa-twitter fa-lg mx-4 px-2"></i>
-                        </a>
-                        <a href="#!" className="text-white">
-                          <i className="fab fa-google fa-lg"></i>
-                        </a>
+                      <div>
+                        {error && <p>{error}</p>}
                       </div>
                     </div>
 
