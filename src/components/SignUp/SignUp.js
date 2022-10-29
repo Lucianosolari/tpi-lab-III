@@ -1,5 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./SignUp.css";
 
@@ -11,22 +12,30 @@ const SignUp = ({ onAddUser }) => {
     password: "",
   });
 
+  const [error, setError] = useState();
+
   const { signUp } = useAuth();
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  const [isEntering, setIsEntering] = useState(false);
 
   const nameInputRef = useRef();
   const surnameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  function handleSubmit(event) {
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    signUp(user.email, user.password);
+    setError('');
+    try {
+      await signUp(user.email, user.password);
+      navigate('/events');
+    
+  
 
     const enteredName = nameInputRef.current.value;
     const enteredSurname = surnameInputRef.current.value;
@@ -40,6 +49,14 @@ const SignUp = ({ onAddUser }) => {
       email: enteredEmail,
       password: enteredPassword,
     });
+  } catch (error) {
+    if (error.code === 'auth/email-already-in-use'){
+      setError('Correo ya utilizado.')
+    }
+    if (error.code === 'auth/weak-password'){
+      setError('Contraseña inválida, debe tener al menos 6 caracteres.')
+    }
+  }
   }
 
   return (
@@ -95,6 +112,7 @@ const SignUp = ({ onAddUser }) => {
                           className="form-control"
                           onChange={handleChange}
                           ref={emailInputRef}
+                          placeholder='example@gmail.com'
                         />
                         <label className="form-label" htmlFor="email">
                           Email
@@ -109,6 +127,7 @@ const SignUp = ({ onAddUser }) => {
                           className="form-control"
                           ref={passwordInputRef}
                           onChange={handleChange}
+                          placeholder='******'
                         />
                         <label className="form-label" htmlFor="password">
                           Contraseña
@@ -121,6 +140,9 @@ const SignUp = ({ onAddUser }) => {
                         >
                           Crear cuenta
                         </button>
+                      </div>
+                      <div className="form-check d-flex justify-content-center mb-4">
+                          {error && <p>{error}</p>}
                       </div>
                     </form>
                   </div>

@@ -13,7 +13,7 @@ import {
 import { AuthProvider } from "./context/AuthContext";
 import NewUser from "./user/NewUser";
 
-import CreateEvents from "./CreateEvents/CreateEvents";
+import CreateEvents from "./components/CreateEvents/CreateEvents";
 
 import AllEvents from "./components/MeetEvents/AllEvents";
 import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="/add-event" element={<CreateEvents />} />
       <Route path="load-swimmer" element={<LoadSwimmer/>} />
 
-      <Route path="/events/" element={<AllEvents />} />
+      <Route path="/events" element={<AllEvents />} />
     </Route>
   )
 );

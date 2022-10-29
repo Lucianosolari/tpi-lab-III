@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import EventsForm from "../components/EventsForm/EventsForm";
+import EventsForm from "../EventsForm/EventsForm";
 
-import useHttp from "../hooks/use-http";
-import { addEvent } from "../lib/api";
+import useHttp from "../../hooks/use-http";
+import { addEvent } from "../../lib/api";
 
 const CreateEvents = () => {
   const { sendRequest, status } = useHttp(addEvent);
