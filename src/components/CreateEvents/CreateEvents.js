@@ -15,8 +15,8 @@ const CreateEvents = () => {
     }
   }, [status, navigate]);
 
-  const addEventHandler = (quoteData) => {
-    sendRequest(quoteData);
+  const addEventHandler = (eventData) => {
+    sendRequest(eventData);
   };
 
   return <EventsForm onAddEvent={addEventHandler} />;

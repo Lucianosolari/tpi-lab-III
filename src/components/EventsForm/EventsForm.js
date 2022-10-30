@@ -5,6 +5,7 @@ const EventsForm = ({onAddEvent}) => {
     const titleInputRef = useRef();
     const organizerInputRef = useRef();
     const locationInputRef = useRef();
+    const descriptionInputRef = useRef();
 
     function handleEventSubmit (event) {
         event.preventDefault();
@@ -13,12 +14,15 @@ const EventsForm = ({onAddEvent}) => {
         const enteredTitle = titleInputRef.current.value;
         const enteredOrganizer = organizerInputRef.current.value;
         const enteredLocation = locationInputRef.current.value;
+        const enteredDescription = descriptionInputRef.current.value;
 
         onAddEvent({
             date: enteredDate,
             title: enteredTitle,
             organizer: enteredOrganizer,
-            location: enteredLocation
+            location: enteredLocation,
+            description : enteredDescription,
+            participants: "",
         })
     }
   return (
@@ -91,6 +95,19 @@ const EventsForm = ({onAddEvent}) => {
                         />
                         <label className="form-label" htmlFor="location">
                           Ubicación
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <textarea
+                          type="text"
+                          id="description"
+                          name="description"
+                          className="form-control"
+                          ref={descriptionInputRef}
+                          //onChange={handleChange}
+                        />
+                        <label className="form-label" htmlFor="description">
+                          Descripción
                         </label>
                       </div>
                       <div className="form-check d-flex justify-content-center mb-4">
