@@ -25,32 +25,47 @@ const router = createBrowserRouter(
     <Route path="/" element={<NavBar />}>
       <Route path="/login" element={<Login />} />
       <Route path="/login/newuser" element={<NewUser />} />
-      
-      <Route path="/table" element={
-      <ProtectedRoute>
-        <Table />
-      </ProtectedRoute>
-      } />
-      <Route path="/add-event" element={
-      <ProtectedRoute>
-        <CreateEvents />
-      </ProtectedRoute>
-      } />
-      <Route path="load-swimmer" element={
-      <ProtectedRoute>
-        <LoadSwimmer/>
-      </ProtectedRoute>
-      } />
-      <Route path="/events" element={
-      <ProtectedRoute>
-        <AllEvents />
-      </ProtectedRoute>
-      } />
-      <Route path="/event-detail" element={
-      <ProtectedRoute>
-        <EventDetail />
-      </ProtectedRoute>
-      } />
+
+      <Route
+        path="/table"
+        element={
+          <ProtectedRoute>
+            <Table />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add-event"
+        element={
+          <ProtectedRoute>
+            <CreateEvents />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="load-swimmer"
+        element={
+          <ProtectedRoute>
+            <LoadSwimmer />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/events"
+        element={
+          <ProtectedRoute>
+            <AllEvents />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/event/:eventId"
+        element={
+          <ProtectedRoute>
+            <EventDetail />
+          </ProtectedRoute>
+        }
+      />
     </Route>
   )
 );
