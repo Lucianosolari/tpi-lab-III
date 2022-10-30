@@ -5,7 +5,7 @@ export async function getAllEvents() {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch events.");
+    throw new Error(data.message || "No se pudo cargar los eventos.");
   }
 
   const transformedEvents = [];
@@ -22,20 +22,20 @@ export async function getAllEvents() {
   return transformedEvents;
 }
 
-export async function getSingleQuote(quoteId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`);
+export async function getSingleEvent(eventId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`);
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch quote.");
+    throw new Error(data.message || "No se pudo encontrar el evento.");
   }
 
-  const loadedQuote = {
-    id: quoteId,
+  const loadedEvent = {
+    id: eventId,
     ...data,
   };
 
-  return loadedQuote;
+  return loadedEvent;
 }
 
 export async function addUser(quoteData) {
@@ -49,16 +49,16 @@ export async function addUser(quoteData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not create user.");
+    throw new Error(data.message || "No se pudo crear el usuario.");
   }
 
   return null;
 }
 
-export async function addEvent(quoteData) {
+export async function addEvent(eventData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/event.json`, {
     method: "POST",
-    body: JSON.stringify(quoteData),
+    body: JSON.stringify(eventData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -66,7 +66,24 @@ export async function addEvent(quoteData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not create user.");
+    throw new Error(data.message || "No se pudo crear el evento.");
+  }
+
+  return null;
+}
+
+export async function accessToEvent(eventId, userData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}/participants.json`, {
+    method: "POST",
+    body: JSON.stringify(userData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo acceder al evento.");
   }
 
   return null;

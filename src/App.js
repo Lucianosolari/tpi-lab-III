@@ -18,6 +18,7 @@ import CreateEvents from "./components/CreateEvents/CreateEvents";
 import AllEvents from "./components/MeetEvents/AllEvents";
 import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import EventDetail from "./components/MeetEvents/EventDetail";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,6 +44,11 @@ const router = createBrowserRouter(
       <Route path="/events" element={
       <ProtectedRoute>
         <AllEvents />
+      </ProtectedRoute>
+      } />
+      <Route path="/event-detail" element={
+      <ProtectedRoute>
+        <EventDetail />
       </ProtectedRoute>
       } />
     </Route>

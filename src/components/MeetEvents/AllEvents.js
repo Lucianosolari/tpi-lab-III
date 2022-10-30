@@ -20,14 +20,6 @@ const AllEvents = () => {
     sendRequest();
   }, [sendRequest]);
 
-  // if (status === 'pending') {
-  //   return (
-  //     <div className='centered'>
-  //       <LoadingSpinner />
-  //     </div>
-  //   );
-  // }
-
   const {loading} = useAuth();
 
   if (status === "pending") {
