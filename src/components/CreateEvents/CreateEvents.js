@@ -11,7 +11,7 @@ const CreateEvents = () => {
 
   useEffect(() => {
     if (status === "completed") {
-      navigate("/future-events");
+      navigate("/events");
     }
   }, [status, navigate]);
 
