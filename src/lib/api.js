@@ -73,13 +73,16 @@ export async function addEvent(eventData) {
 }
 
 export async function accessToEvent(eventId, userData) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}/participants.json`, {
-    method: "POST",
-    body: JSON.stringify(userData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/event/${eventId}/participants.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const data = await response.json();
 
   if (!response.ok) {

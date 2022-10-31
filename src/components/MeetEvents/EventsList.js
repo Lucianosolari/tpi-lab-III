@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import './EventsList.css'
+import "./EventsList.css";
 
 import FutureEvents from "./FutureEvents";
 
@@ -12,6 +12,7 @@ const EventList = ({ events }) => {
           {events.map((meet) => (
             <FutureEvents
               key={meet.id}
+              id={meet.id}
               date={meet.date}
               title={meet.title}
               organizer={meet.organizer}

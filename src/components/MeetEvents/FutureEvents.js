@@ -1,22 +1,19 @@
 import EventsCard from "../EventsCard/EventsCard";
-import { useNavigate } from "react-router-dom";
 
-const FutureEvents = ({ date, title, organizer, location }) => {
+import { Link } from "react-router-dom";
 
-  const navigate = useNavigate();
-  
-  const accessToEventHandler = () => {
-    navigate('/event-detail');
-  };
-
+const FutureEvents = ({ date, title, organizer, location, id }) => {
   return (
-      <EventsCard>
-        <p>{date}</p>
-        <h2>{title}</h2>
-        <p>{organizer}</p>
-        <p>{location}</p>
-        <button onClick={accessToEventHandler} type="button">Ingresar</button>
-      </EventsCard>
+    <EventsCard>
+      <p>{date}</p>
+      <h2>{title}</h2>
+      <p>{organizer}</p>
+      <p>{location}</p>
+
+      <Link className="btn" to={`/event/${id}`}>
+        Ingresar
+      </Link>
+    </EventsCard>
   );
 };
 
