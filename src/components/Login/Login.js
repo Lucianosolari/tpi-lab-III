@@ -28,9 +28,8 @@ const Login = () => {
     setError('');
     try {
       await login(user.email, user.password);
-      navigate('/events');
+      navigate("/events"); //ARREGLAR NAVIGATE
   } catch (error) {
-    console.log(error)
     if (!user.email){
       setError('Ingrese un mail.')
     }

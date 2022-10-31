@@ -22,6 +22,28 @@ export async function getAllEvents() {
   return transformedEvents;
 }
 
+export async function getAllUsers() {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo cargar los usuarios.");
+  }
+
+  const transformedUsers = [];
+
+  for (const key in data) {
+    const eventObj = {
+      id: key,
+      ...data[key],
+    };
+
+    transformedUsers.push(eventObj);
+  }
+
+  return transformedUsers;
+}
+
 export async function getSingleEvent(eventId) {
   const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`);
   const data = await response.json();
