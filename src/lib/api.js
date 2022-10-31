@@ -91,3 +91,23 @@ export async function accessToEvent(eventId, userData) {
 
   return null;
 }
+
+export async function addUserToEvent(requestData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/userEvent/${requestData.eventId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(requestData.userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Could not add comment.");
+  }
+
+  return { userId: data.name };
+}
