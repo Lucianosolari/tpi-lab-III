@@ -1,46 +1,42 @@
-import { Fragment, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useHttp from "../../hooks/use-http";
+import { addUserToEvent } from "../../lib/api";
 
-import HighlightedQuote from '../components/quotes/HighlightedQuote';
-import useHttp from '../hooks/use-http';
-import { getSingleEvent } from '../lib/api';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
+import { useAuth } from "../../context/AuthContext";
 
-const EventsInscription = () => {
+const EventsInscription = (props) => {
+  const { user } = useAuth();
   const params = useParams();
 
   const { eventId } = params;
 
-  const { sendRequest, status, data: loadedEvent, error } = useHttp(
-    getSingleEvent,
-    true
-  );
+  const { sendRequest, status, error } = useHttp(addUserToEvent);
+
+  const { onAddedComment } = props;
 
   useEffect(() => {
-    sendRequest(eventId);
-  }, [sendRequest, eventId]);
+    if (status === "completed" && !error) {
+      //onAddedComment();
+    }
+  }, [status, error, onAddedComment]);
 
-  if (status === 'pending') {
-    return (
-      <div className='centered'>
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  const submitFormHandler = (event) => {
+    event.preventDefault();
 
-  if (error) {
-    return <p className='centered'>{error}</p>;
-  }
+    // optional: Could validate here
 
-  if (!loadedEvent.text) {
-    return <p>No quote found!</p>;
-  }
+    sendRequest({ userData: { email: user.email }, eventId: eventId });
+  };
 
   return (
-    <Fragment>
-      <HighlightedQuote text={loadedQuote.text} author={loadedQuote.author} />
-      <Outlet />
-    </Fragment>
+    <form onSubmit={submitFormHandler}>
+      {status === "pending" && <div className="centered">Cargando</div>}
+
+      <div>
+        <button className="btn">Inscribirme</button>
+      </div>
+    </form>
   );
 };
 
