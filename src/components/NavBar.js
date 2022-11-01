@@ -28,7 +28,7 @@ const NavBar = () => {
         <Container fluid>
           <NavLink to="/events">Futuros eventos</NavLink>
           <NavLink to="/table">Resultados</NavLink>
-          {role === "admin" && (
+          {{ user } && role === "admin" && (
             <Button onClick={adminHandler}>Agregar evento</Button>
           )}
           {!user && <Button onClick={loginHandler}>Iniciar sesión</Button>}

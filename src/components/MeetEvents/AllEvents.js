@@ -8,7 +8,7 @@ import { getAllEvents } from "../../lib/api";
 import EventsList from "./EventsList";
 
 const AllEvents = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const {
     sendRequest,
     status,
@@ -20,7 +20,7 @@ const AllEvents = () => {
     sendRequest();
   }, [sendRequest]);
 
-  const {loading} = useAuth();
+  const { loading, name } = useAuth();
 
   if (status === "pending") {
     return <p>Cargando eventos...</p>;
@@ -34,15 +34,14 @@ const AllEvents = () => {
     return <p>No hay eventos</p>;
   }
 
-  if (loading) return <h1>Cargando...</h1>
+  if (loading) return <h1>Cargando...</h1>;
 
   return (
     <>
-      <h2>Bienvenido {user.email}, disfrute la página!!</h2>
+      <h2>Bienvenido {name}, disfrute la página!!</h2>
       <EventsList events={loadedEvents} />;
     </>
-  )
-  
+  );
 };
 
 export default AllEvents;
