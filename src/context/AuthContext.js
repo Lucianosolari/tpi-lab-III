@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState("");
-
+  const [name, setName] = useState("");
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     userData.forEach((u) => {
       if (u.email === user.email) {
         let loggedUser = u;
-
+        setName(loggedUser.name);
         setRole(loggedUser.role);
       }
     });
@@ -50,13 +50,15 @@ export function AuthProvider({ children }) {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      dispararComparacion(currentUser);
+      if (currentUser) {
+        dispararComparacion(currentUser);
+      }
     });
   }, []);
 
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, loading, user, role }}
+      value={{ signUp, login, logout, loading, user, role, name }}
     >
       {children}
     </authContext.Provider>
