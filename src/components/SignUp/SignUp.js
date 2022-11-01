@@ -20,7 +20,6 @@ const SignUp = ({ onAddUser }) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-
   const nameInputRef = useRef();
   const surnameInputRef = useRef();
   const emailInputRef = useRef();
@@ -30,33 +29,31 @@ const SignUp = ({ onAddUser }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setError('');
+    setError("");
     try {
       await signUp(user.email, user.password);
-      navigate('/events');
-    
-  
+      navigate("/events");
 
-    const enteredName = nameInputRef.current.value;
-    const enteredSurname = surnameInputRef.current.value;
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+      const enteredName = nameInputRef.current.value;
+      const enteredSurname = surnameInputRef.current.value;
+      const enteredEmail = emailInputRef.current.value;
+      const enteredPassword = passwordInputRef.current.value;
 
-    onAddUser({
-      role: "user",
-      name: enteredName,
-      surname: enteredSurname,
-      email: enteredEmail,
-      password: enteredPassword,
-    });
-  } catch (error) {
-    if (error.code === 'auth/email-already-in-use'){
-      setError('Correo ya utilizado.')
+      onAddUser({
+        role: "user",
+        name: enteredName,
+        surname: enteredSurname,
+        email: enteredEmail,
+        password: enteredPassword,
+      });
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        setError("Correo ya utilizado.");
+      }
+      if (error.code === "auth/weak-password") {
+        setError("Contraseña inválida, debe tener al menos 6 caracteres.");
+      }
     }
-    if (error.code === 'auth/weak-password'){
-      setError('Contraseña inválida, debe tener al menos 6 caracteres.')
-    }
-  }
   }
 
   return (
@@ -112,7 +109,7 @@ const SignUp = ({ onAddUser }) => {
                           className="form-control"
                           onChange={handleChange}
                           ref={emailInputRef}
-                          placeholder='example@gmail.com'
+                          placeholder="example@gmail.com"
                         />
                         <label className="form-label" htmlFor="email">
                           Email
@@ -127,7 +124,7 @@ const SignUp = ({ onAddUser }) => {
                           className="form-control"
                           ref={passwordInputRef}
                           onChange={handleChange}
-                          placeholder='******'
+                          placeholder="******"
                         />
                         <label className="form-label" htmlFor="password">
                           Contraseña
@@ -142,7 +139,7 @@ const SignUp = ({ onAddUser }) => {
                         </button>
                       </div>
                       <div className="form-check d-flex justify-content-center mb-4">
-                          {error && <p>{error}</p>}
+                        {error && <p>{error}</p>}
                       </div>
                     </form>
                   </div>
