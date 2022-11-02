@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 
 import "./Login.css";
@@ -15,27 +15,32 @@ const Login = () => {
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  if (isAuthenticated) {
+    return <Navigate to='/events' replace />
+  }
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
+    if (!user.email) {
+      setError("Ingrese un mail.");
+      return;
+    }
+    if (!user.password) {
+      setError("Ingrese la contraseña.");
+      return;
+    }
     try {
-      await login(user.email, user.password);
-      navigate("/events"); //ARREGLAR NAVIGATE
+      const response = await login(user.email, user.password);
+      navigate('/events');
     } catch (error) {
-      if (!user.email) {
-        setError("Ingrese un mail.");
-      }
-      if (!user.password) {
-        setError("Ingrese la contraseña.");
-      }
       if (error.code === "auth/user-not-found") {
         setError("Correo no registrado.");
       }
