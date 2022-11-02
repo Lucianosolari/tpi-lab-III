@@ -61,9 +61,7 @@ const SignUp = ({ onAddUser }) => {
   return (
     <section id={contextTheme} className={ThemeContext}>
       <section className="vh-100 ">
-        <div
-          className="px-4 py-5 px-md-5 text-center text-lg-start" /*style="background-color: hsl(0, 0%, 96%)"*/
-        >
+        <div className="px-4 py-5 px-md-5 text-center text-lg-start">
           <div className="container">
             <div className="row gx-lg-5 align-items-center">
               <div className="col-lg-6 mb-5 mb-lg-0">

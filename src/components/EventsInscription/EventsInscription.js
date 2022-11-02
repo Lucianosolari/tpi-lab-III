@@ -34,7 +34,7 @@ const EventsInscription = (props) => {
       {status === "pending" && <div className="centered">Cargando</div>}
 
       <div>
-        <button className="btn">Inscribirme</button>
+        <button className="btn btn-primary ">Inscribirme</button>
       </div>
     </form>
   );
