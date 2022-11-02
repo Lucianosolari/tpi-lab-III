@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
-
+import { useContext, useRef, useState } from "react";
 
 import "./Login.css";
 import { useAuth } from "../../context/AuthContext";
-
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Login = () => {
+  const { contextTheme, setContextTheme } = useContext(ThemeContext);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -25,30 +25,29 @@ const Login = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setError('');
+    setError("");
     try {
       await login(user.email, user.password);
       navigate("/events"); //ARREGLAR NAVIGATE
-  } catch (error) {
-    if (!user.email){
-      setError('Ingrese un mail.')
-    }
-    if (!user.password){
-      setError('Ingrese la contraseña.')
-    }
-    if (error.code === 'auth/user-not-found'){
-      setError('Correo no registrado.')
-    }
-    if (error.code === 'auth/wrong-password'){
-      setError('Contraseña incorrecta.')
+    } catch (error) {
+      if (!user.email) {
+        setError("Ingrese un mail.");
+      }
+      if (!user.password) {
+        setError("Ingrese la contraseña.");
+      }
+      if (error.code === "auth/user-not-found") {
+        setError("Correo no registrado.");
+      }
+      if (error.code === "auth/wrong-password") {
+        setError("Contraseña incorrecta.");
+      }
     }
   }
-  }
-  
 
   return (
     <>
-      <section className=" gradient-custom vh-100">
+      <section className={contextTheme} id={contextTheme}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -99,9 +98,7 @@ const Login = () => {
                       >
                         Ingresar
                       </button>
-                      <div>
-                        {error && <p>{error}</p>}
-                      </div>
+                      <div>{error && <p>{error}</p>}</div>
                     </div>
 
                     <div>
@@ -112,7 +109,7 @@ const Login = () => {
                         </Link>
                       </p>
                     </div>
-                </form>
+                  </form>
                 </div>
               </div>
             </div>

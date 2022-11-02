@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 // import LoadingSpinner from '../components/UI/LoadingSpinner';
 // import NoQuotesFound from '../components/quotes/NoQuotesFound';
 import useHttp from "../../hooks/use-http";
 import { getAllEvents } from "../../lib/api";
 import EventsList from "./EventsList";
+import "./AllEvents.css";
 
 const AllEvents = () => {
+  const { contextTheme, setContextTheme } = useContext(ThemeContext);
   const { user } = useAuth();
   const {
     sendRequest,
@@ -37,10 +40,12 @@ const AllEvents = () => {
   if (loading) return <h1>Cargando...</h1>;
 
   return (
-    <>
-      <h2>Bienvenido {name}, disfrute la página!!</h2>
+    <section id={contextTheme}>
+      <h2 className={ThemeContext} id="welcome">
+        Bienvenido {name}, disfruta la página!!
+      </h2>
       <EventsList events={loadedEvents} />;
-    </>
+    </section>
   );
 };
 

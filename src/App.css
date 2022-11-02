@@ -1,9 +1,20 @@
 #Dark {
-    background-color: #282c34;
-    color: grey
+  --bs-bg-opacity: 0.1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  background: hsla(0, 0%, 0%, 0.61);
+  background: linear-gradient(to right, rgb(42, 37, 48), rgb(41, 102, 207));
+  --bs-dark-rgb: 33, 37, 41;
 }
 
 #Light {
-    background-color: #f2f4f6;
-    color: #0d3f67;
+  --bs-bg-opacity: 0.1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  background: #fffaf5f6;
+  background: linear-gradient(
+    to right,
+    rgb(170, 165, 175),
+    rgba(78, 160, 142, 0.63)
+  );
+
+  --bs-light-rgb: 248, 249, 250;
 }
