@@ -10,7 +10,7 @@ const FutureEvents = ({ date, title, organizer, location, id }) => {
       <p>{organizer}</p>
       <p>{location}</p>
 
-      <Link className="btn" to={`/event/${id}`}>
+      <Link className="btn btn-primary" to={`/event/${id}`}>
         Ingresar
       </Link>
     </EventsCard>
