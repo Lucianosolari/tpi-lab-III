@@ -38,13 +38,15 @@ export function AuthProvider({ children }) {
   const login = (email, password) => 
     signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
     setIsAuthenticated(true);
-    // ...
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+  })
+  // .catch((error) => {
+  //   console.log("El error completo es " + error)
+  //   console.log("El error code es " + error.code);
+  //   console.log("El error message es " + error.message);
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  // });
   
 
   const logout = () => signOut(auth)
