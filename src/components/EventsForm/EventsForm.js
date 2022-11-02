@@ -1,33 +1,35 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
-const EventsForm = ({onAddEvent}) => {
-    const dateInputRef = useRef();
-    const titleInputRef = useRef();
-    const organizerInputRef = useRef();
-    const locationInputRef = useRef();
-    const descriptionInputRef = useRef();
+const EventsForm = ({ onAddEvent }) => {
+  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const dateInputRef = useRef();
+  const titleInputRef = useRef();
+  const organizerInputRef = useRef();
+  const locationInputRef = useRef();
+  const descriptionInputRef = useRef();
 
-    function handleEventSubmit (event) {
-        event.preventDefault();
+  function handleEventSubmit(event) {
+    event.preventDefault();
 
-        const enteredDate = dateInputRef.current.value;
-        const enteredTitle = titleInputRef.current.value;
-        const enteredOrganizer = organizerInputRef.current.value;
-        const enteredLocation = locationInputRef.current.value;
-        const enteredDescription = descriptionInputRef.current.value;
+    const enteredDate = dateInputRef.current.value;
+    const enteredTitle = titleInputRef.current.value;
+    const enteredOrganizer = organizerInputRef.current.value;
+    const enteredLocation = locationInputRef.current.value;
+    const enteredDescription = descriptionInputRef.current.value;
 
-        onAddEvent({
-            date: enteredDate,
-            title: enteredTitle,
-            organizer: enteredOrganizer,
-            location: enteredLocation,
-            description : enteredDescription,
-            participants: "",
-        })
-    }
+    onAddEvent({
+      date: enteredDate,
+      title: enteredTitle,
+      organizer: enteredOrganizer,
+      location: enteredLocation,
+      description: enteredDescription,
+      participants: "",
+    });
+  }
   return (
     <>
-      <section className="vh-100 gradient-custom">
+      <section id={contextTheme} className={ThemeContext}>
         <div
           className="px-4 py-5 px-md-5 text-center text-lg-start" /*style="background-color: hsl(0, 0%, 96%)"*/
         >
@@ -127,7 +129,7 @@ const EventsForm = ({onAddEvent}) => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default EventsForm
+export default EventsForm;

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
-import './LoadSwimmer.css'
+import "./LoadSwimmer.css";
 
 export const LoadSwimmer = () => {
+  const { contextTheme, setContextTheme } = useContext(ThemeContext);
   return (
-    <>
-      <section className=" gradient-custom vh-100">
+    <section id={contextTheme} className={ThemeContext}>
+      <section className=" vh-100">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -55,30 +57,30 @@ export const LoadSwimmer = () => {
                         </label>
                       </div>
                       <div className="form-outline form-white mb-4">
-                        
-                            <select className='form-select trial-select'
-                                id="trialDistance"
-                            >
-                                <option disabled selected>Distancia</option>
-                                <option value={50}>50 mt</option>
-                                <option value={100}>100 mt</option>
-                                <option value={200}>200 mt</option>
-
-                            </select>
-                            <select className='form-select'
-                                id="trialStyle"
-                            >
-                                <option disabled selected>Estilo</option>
-                                <option value={"butterfly"}>Mariposa</option>
-                                <option value={"backstroke"}>Espalda</option>
-                                <option value={"breaststroke"}>Pecho</option>
-                                <option value={"freestyle"}>Libre</option>
-
-                            </select>
-                            <label className="form-label" htmlFor="swimmerTrial">
-                            Prueba
-                            </label>
-                        </div>
+                        <select
+                          className="form-select trial-select"
+                          id="trialDistance"
+                        >
+                          <option disabled selected>
+                            Distancia
+                          </option>
+                          <option value={50}>50 mt</option>
+                          <option value={100}>100 mt</option>
+                          <option value={200}>200 mt</option>
+                        </select>
+                        <select className="form-select" id="trialStyle">
+                          <option disabled selected>
+                            Estilo
+                          </option>
+                          <option value={"butterfly"}>Mariposa</option>
+                          <option value={"backstroke"}>Espalda</option>
+                          <option value={"breaststroke"}>Pecho</option>
+                          <option value={"freestyle"}>Libre</option>
+                        </select>
+                        <label className="form-label" htmlFor="swimmerTrial">
+                          Prueba
+                        </label>
+                      </div>
 
                       <button
                         className="btn btn-outline-light btn-lg px-5"
@@ -99,13 +101,13 @@ export const LoadSwimmer = () => {
                         </a>
                       </div>
                     </div>
-                </form>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-    </>
-  )
-}
+    </section>
+  );
+};

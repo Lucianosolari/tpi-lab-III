@@ -1,10 +1,12 @@
 import userEvent from "@testing-library/user-event";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 import "./SignUp.css";
 
 const SignUp = ({ onAddUser }) => {
+  const { contextTheme, setContextTheme } = useContext(ThemeContext);
   const [user, setUser] = useState({
     name: "",
     surname: "",
@@ -57,8 +59,8 @@ const SignUp = ({ onAddUser }) => {
   }
 
   return (
-    <>
-      <section className="vh-100 gradient-custom">
+    <section id={contextTheme} className={ThemeContext}>
+      <section className="vh-100 ">
         <div
           className="px-4 py-5 px-md-5 text-center text-lg-start" /*style="background-color: hsl(0, 0%, 96%)"*/
         >
@@ -149,7 +151,7 @@ const SignUp = ({ onAddUser }) => {
           </div>
         </div>
       </section>
-    </>
+    </section>
   );
 };
 
