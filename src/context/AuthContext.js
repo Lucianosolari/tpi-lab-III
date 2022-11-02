@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { getAllUsers } from "../lib/api";
-import { Navigate } from "react-router-dom";
 
 
 export const authContext = createContext();
@@ -23,19 +22,26 @@ export function AuthProvider({ children }) {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const signUp = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      setIsAuthenticated(true);
+      // ...
+    }).catch((error)=>{
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    })
 
 
   const login = (email, password) => 
     signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
-    const user = userCredential.user;
     setIsAuthenticated(true);
     // ...
-  })
-  .catch((error) => {
+  }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
   });

@@ -38,7 +38,7 @@ const Login = () => {
       return;
     }
     try {
-      const response = await login(user.email, user.password);
+      await login(user.email, user.password);
       navigate('/events');
     } catch (error) {
       if (error.code === "auth/user-not-found") {

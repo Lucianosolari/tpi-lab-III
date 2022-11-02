@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import "./SignUp.css";
@@ -16,7 +16,7 @@ const SignUp = ({ onAddUser }) => {
 
   const [error, setError] = useState();
 
-  const { signUp } = useAuth();
+  const { signUp, isAuthenticated } = useAuth();
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -28,7 +28,9 @@ const SignUp = ({ onAddUser }) => {
   const passwordInputRef = useRef();
 
   const navigate = useNavigate();
-
+  if (isAuthenticated) {
+    return <Navigate to='/events' replace />
+  }
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
