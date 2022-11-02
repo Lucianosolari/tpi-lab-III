@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { getAllUsers } from "../lib/api";
+import { Navigate } from "react-router-dom";
+
 
 export const authContext = createContext();
 
@@ -20,13 +22,31 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
 
-  const logout = () => signOut(auth);
+  const login = (email, password) => 
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    setIsAuthenticated(true);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+  
+
+  const logout = () => signOut(auth)
+  .then(() => {
+    setIsAuthenticated(false);
+  }).catch((error) =>{
+    console.log(error)
+  });
 
   const compareUser = async (user) => {
     const userData = await getAllUsers();
@@ -42,7 +62,7 @@ export function AuthProvider({ children }) {
 
   console.log(role);
 
-  const dispararComparacion = (user) => {
+  const triggerComparission = (user) => {
     compareUser(user);
   };
 
@@ -51,14 +71,15 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        dispararComparacion(currentUser);
+        triggerComparission(currentUser);
       }
     });
   }, []);
 
+
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, loading, user, role, name }}
+      value={{ signUp, login, logout, loading, user, role, name, isAuthenticated }}
     >
       {children}
     </authContext.Provider>
