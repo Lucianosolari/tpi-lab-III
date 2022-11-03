@@ -23,7 +23,7 @@ const NavBar = () => {
     navigate("/login");
   };
 
-  const adminHandler = async () => {
+  const addEventHandler = async () => {
     navigate("/add-event");
   };
 
@@ -44,8 +44,9 @@ const NavBar = () => {
         <Container fluid>
           <NavLink to="/events">Futuros eventos</NavLink>
           <NavLink to="/table">Resultados</NavLink>
+          <NavLink to="/my-account">Mi cuenta</NavLink>
           {user && role === "admin" && (
-            <Button onClick={adminHandler}>Agregar evento</Button>
+            <Button onClick={addEventHandler}>Agregar evento</Button>
           )}
           {!user && <Button onClick={loginHandler}>Iniciar sesión</Button>}
           {user && <Button onClick={logoutHandler}>Cerrar sesión</Button>}

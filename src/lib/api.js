@@ -86,12 +86,25 @@ export async function addEvent(eventData) {
     },
   });
   const data = await response.json();
-
   if (!response.ok) {
     throw new Error(data.message || "No se pudo crear el evento.");
   }
-
   return null;
+}
+
+export async function removeEvent(eventId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event.json`, {
+    method: "POST",
+    body: JSON.stringify(eventId),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+if (!response.ok) {
+  throw new Error(data.message ||'No se pudo borrar el evento.')
+}
+return null;
 }
 
 export async function accessToEvent(eventId, userData) {
@@ -128,7 +141,27 @@ export async function addUserToEvent(requestData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not add comment.");
+    throw new Error(data.message || "No se pudo inscribir al usuario en el evento.");
+  }
+
+  return { userId: data.name };
+}
+
+export async function removeUserFromEvent(requestData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/userEvent/${requestData.eventId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(requestData.userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo borrar al usuario del evento.");
   }
 
   return { userId: data.name };
