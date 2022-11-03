@@ -1,0 +1,36 @@
+.user-name {
+    display: flex;
+    margin: 5px;
+    align-items: center;
+}
+
+.user-name button {
+    margin-left: 5px;
+}
+
+.user-surname {
+    display: flex;
+    margin: 5px;
+    align-items: center;
+}
+
+.user-surname button {
+    margin-left: 5px;
+}
+
+form {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+form button {
+    margin-right: 2px;
+    margin-left: 2px;
+    border: black solid 1px;
+    border-radius: 5px;
+}
+
+.forms {
+    display: grid;
+    justify-content: center;
+}

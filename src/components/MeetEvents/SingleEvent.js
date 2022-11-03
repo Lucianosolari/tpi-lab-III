@@ -6,7 +6,7 @@ import EventsInscription from "../EventsInscription/EventsInscription";
 const SingleEvent = ({ eventSingle }) => {
   const { contextTheme, setContextTheme } = useContext(ThemeContext);
   return (
-    <section id={contextTheme} className={ThemeContext}>
+    <section id={contextTheme}>
       <section className="container vh-100">
         <div className="px-4 py-5 px-md-5 text-center ">
           <EventsCard>

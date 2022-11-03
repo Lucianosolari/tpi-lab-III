@@ -21,6 +21,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const signUp = (email, password) =>
@@ -63,6 +64,7 @@ export function AuthProvider({ children }) {
       if (u.email === user.email) {
         let loggedUser = u;
         setName(loggedUser.name);
+        setSurname(loggedUser.surname);
         setRole(loggedUser.role);
       }
     });
@@ -70,7 +72,7 @@ export function AuthProvider({ children }) {
 
   console.log(role);
 
-  const triggerComparission = (user) => {
+  const triggerComparison = (user) => {
     compareUser(user);
   };
 
@@ -79,7 +81,7 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        triggerComparission(currentUser);
+        triggerComparison(currentUser);
       }
     });
   }, []);
@@ -87,7 +89,7 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, loading, user, role, name, isAuthenticated }}
+      value={{ signUp, login, logout, loading, user, role, name, surname, isAuthenticated }}
     >
       {children}
     </authContext.Provider>

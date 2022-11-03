@@ -19,12 +19,22 @@ import AllEvents from "./components/MeetEvents/AllEvents";
 import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import EventDetail from "./components/MeetEvents/EventDetail";
+import MyAccount from "./components/MyAccount/MyAccount";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<NavBar />}>
       <Route path="/login" element={<Login />} />
       <Route path="/login/newuser" element={<NewUser />} />
+
+      <Route
+        path="/my-account"
+        element={
+          <ProtectedRoute>
+            <MyAccount />
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         path="/table"
