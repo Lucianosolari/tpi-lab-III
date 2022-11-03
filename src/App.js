@@ -20,6 +20,7 @@ import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import EventDetail from "./components/MeetEvents/EventDetail";
 import MyAccount from "./components/MyAccount/MyAccount";
+import { EventsContextProvider } from "./context/EventsContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -83,9 +84,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <AuthProvider>
-      <header>
+      <EventsContextProvider>
         <RouterProvider router={router}></RouterProvider>
-      </header>
+      </EventsContextProvider>
     </AuthProvider>
   );
 }
