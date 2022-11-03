@@ -4,8 +4,9 @@ import { useAuth } from "../../context/AuthContext";
 
 const Table = () => {
   const columns = [
-    { key: "id", name: "NUMERO NADADOR" },
+    { key: "id", name: "ID" },
     { key: "name", name: "NOMBRE" },
+    { key: "surname", name: "APELLIDO" },
     { key: "category", name: "CATEGORIA" },
     { key: "ranking", name: "CLASIFICACIÓN" },
   ];
@@ -13,10 +14,10 @@ const Table = () => {
   const {loading} = useAuth();
 
   const rows = [
-    { id: 0, name: "Lucho", category: "Junior", ranking: "10" },
+    { id: 0, name: "Luciano", surname: "Solari", category: "Junior", ranking: "10" },
     { id: 1, name: "Santiago", category: "Pro", ranking: "1" },
     { id: 2, name: "Manuel", category: "Junior", ranking: "158" },
-    { id: 3, name: "Matias", category: "Junior", ranking: "-81" },
+    { id: 3, name: "Matias", category: "Junior", ranking: "81" },
   ];
 
   if (loading) return <h1>Cargando página principal...</h1>

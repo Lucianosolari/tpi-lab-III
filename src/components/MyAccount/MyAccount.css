@@ -14,6 +14,12 @@
     align-items: center;
 }
 
+.user-email {
+    display: flex;
+    margin: 5px;
+    align-items: center;
+}
+
 .user-surname button {
     margin-left: 5px;
 }

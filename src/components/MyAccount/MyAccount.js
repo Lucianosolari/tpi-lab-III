@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext'
 
 import './MyAccount.css'
@@ -14,16 +13,19 @@ const MyAccount = () => {
         <span>
             <h1>Mi cuenta</h1>
         </span>
+        <div className='user.email'>
+            <h4>{user.email}</h4>
+        </div>
         <div className='user-name'>
-            <h4>Nombre: {name}</h4>
+            <h5>Nombre: {name}</h5>
             <button className='btn btn-secondary' onClick={() => setModifyName(true)}>Modificar</button>
         </div>
         <div className='user-surname'>
-            <h4>Apellido: {surname}</h4>
+            <h5>Apellido: {surname}</h5>
             <button className='btn btn-secondary' onClick={() => setModifySurname(true)}>Modificar</button>
         </div>
         <div>
-        <h4>Correo: {user.email}</h4>
+            <button>BORRAR CUENTA</button>
         </div>
         <div className='forms'>
             {modifyName && 
