@@ -42,7 +42,8 @@ const ModifyEventsForm = () => {
     console.log("ID en front es: " + eventId);
     console.log(eventData);
 
-    await sendRequest( eventId, eventData );
+    await sendRequest({ eventData, eventId: eventId });
+    navigate('/events');
   } 
 
   return (
