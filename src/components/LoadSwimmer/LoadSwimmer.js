@@ -4,9 +4,9 @@ import { ThemeContext } from "../../context/ThemeContext";
 import "./LoadSwimmer.css";
 
 export const LoadSwimmer = () => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const { contextTheme } = useContext(ThemeContext);
   return (
-    <section id={contextTheme} className={ThemeContext}>
+    <section id={contextTheme}>
       <section className=" vh-100">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

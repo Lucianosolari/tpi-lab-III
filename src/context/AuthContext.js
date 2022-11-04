@@ -29,9 +29,7 @@ export function AuthProvider({ children }) {
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
       setIsAuthenticated(true);
-      // ...
     }).catch((error)=>{
       const errorCode = error.code;
       const errorMessage = error.message;

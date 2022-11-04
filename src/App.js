@@ -1,6 +1,5 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
-import Table from "./components/Table/Table";
 import Login from "./components/Login/Login";
 
 import {
@@ -23,6 +22,7 @@ import MyAccount from "./components/MyAccount/MyAccount";
 import { EventsContextProvider } from "./context/EventsContext";
 import ModifyEventsForm from "./components/ModifyEvents/ModifyEventsForm";
 import ModifyAccount from "./components/MyAccount/ModifyAccount";
+import UserEvents from "./components/Table/UserEvents";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="/login/newuser" element={<NewUser />} />
 
       <Route
-        path="/my-account/:idFromDatabase"
+        path="/my-account/:userId"
         element={
           <ProtectedRoute>
             <MyAccount />
@@ -49,10 +49,10 @@ const router = createBrowserRouter(
       />
 
       <Route
-        path="/table"
+        path="/user-events/:userId"
         element={
           <ProtectedRoute>
-            <Table />
+            <UserEvents/>
           </ProtectedRoute>
         }
       />
@@ -81,7 +81,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/events"
+        path="/events/:userId"
         element={
           <ProtectedRoute>
             <AllEvents />
@@ -89,7 +89,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/event/:eventId"
+        path="/event/:userId/:eventId"
         element={
           <ProtectedRoute>
             <EventDetail />

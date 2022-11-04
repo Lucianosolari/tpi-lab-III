@@ -1,8 +1,11 @@
 import EventsCard from "../EventsCard/EventsCard";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const FutureEvents = ({ date, title, organizer, location, id }) => {
+
+  const params = useParams();
+  const {userId} = params;
   
   return (
       <EventsCard>
@@ -11,7 +14,7 @@ const FutureEvents = ({ date, title, organizer, location, id }) => {
         <p>Organiza: {organizer}</p>
         <p>Ubicación: {location}</p>
 
-        <Link className="btn btn-primary" to={`/event/${id}`}>
+        <Link className="btn btn-primary" to={`/event/${userId}/${id}`}>
           Ingresar
         </Link>
       </EventsCard>
