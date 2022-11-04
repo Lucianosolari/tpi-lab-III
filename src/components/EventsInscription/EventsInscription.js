@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import { addUserToEvent, modifyEvent, removeEvent } from "../../lib/api";
 
@@ -14,16 +14,22 @@ const EventsInscription = (props) => {
   const [editEvent, setEditEvent] = useState(false);
 
   const params = useParams();
-
   const { eventId } = params;
 
   const { sendRequest, status, error } = useHttp(addUserToEvent);
 
   const { onAddedComment } = props;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (status === "completed" && !error) {
-      //onAddedComment();
+      alert("Se ha inscripto en el evento exitosamente!");
+      navigate('/events');
+    }
+    if (status === "completed" && error) {
+      alert("Ha ocurrido un error.");
+      navigate('/events');
     }
   }, [status, error, onAddedComment]);
 
@@ -36,10 +42,11 @@ const EventsInscription = (props) => {
 
   const removeEventFromDatabase = async () => {
     await removeEvent(eventId);
+    navigate('/events');
   }
 
   const onEditEvent = async () => {
-    modifyEvent(eventId)
+    await modifyEvent(eventId)
   }
 
   return (
