@@ -7,7 +7,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { useContext } from 'react';
 
 const ModifyEventsForm = () => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const { contextTheme } = useContext(ThemeContext);
 
   const newDateRef = useRef();
   const newTitleRef = useRef();
@@ -39,9 +39,6 @@ const ModifyEventsForm = () => {
       participants: "",
       description: enteredNewDescription
     }
-
-    console.log("ID en front es: " + eventId);
-    console.log(eventData);
 
     await sendRequest({ eventData, eventId: eventId });
     navigate('/events');

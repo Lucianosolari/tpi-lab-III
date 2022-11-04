@@ -60,6 +60,22 @@ export async function getSingleEvent(eventId) {
   return loadedEvent;
 }
 
+export async function getSingleUser(userId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user/${userId}.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo encontrar el evento.");
+  }
+
+  const loadedUser = {
+    id: userId,
+    ...data,
+  };
+
+  return loadedUser;
+}
+
 export async function addUser(userData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/user.json`, {
     method: "POST",
@@ -72,6 +88,23 @@ export async function addUser(userData) {
 
   if (!response.ok) {
     throw new Error(data.message || "No se pudo crear el usuario.");
+  }
+
+  return null;
+}
+
+export async function modifyUser(requestData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user/${requestData.userId}.json`, {
+    method: "PUT",
+    body: JSON.stringify(requestData.userData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo modificar el usuario.");
   }
 
   return null;

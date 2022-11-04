@@ -22,6 +22,7 @@ import EventDetail from "./components/MeetEvents/EventDetail";
 import MyAccount from "./components/MyAccount/MyAccount";
 import { EventsContextProvider } from "./context/EventsContext";
 import ModifyEventsForm from "./components/ModifyEvents/ModifyEventsForm";
+import ModifyAccount from "./components/MyAccount/ModifyAccount";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +35,15 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <MyAccount />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/my-account/modify"
+        element={
+          <ProtectedRoute>
+            <ModifyAccount/>
           </ProtectedRoute>
         }
       />
