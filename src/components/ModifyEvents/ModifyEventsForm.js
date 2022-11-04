@@ -22,7 +22,7 @@ const ModifyEventsForm = () => {
 
   const { sendRequest, status } = useHttp(modifyEvent);
 
-  const submitModifiedEventHandler = (event) => {
+  const submitModifiedEventHandler = async (event) => {
     event.preventDefault();
 
     const enteredNewDate = newDateRef.current.value;
@@ -32,14 +32,17 @@ const ModifyEventsForm = () => {
     const enteredNewDescription = newDescriptionRef.current.value;
 
     const eventData = {
-      newDate: enteredNewDate,
-      newTitle: enteredNewTitle,
-      newOrganizer: enteredNewOrganizer,
-      newLocation: enteredNewLocation,
-      newDescription: enteredNewDescription
+      date: enteredNewDate,
+      title: enteredNewTitle,
+      organizer: enteredNewOrganizer,
+      location: enteredNewLocation,
+      description: enteredNewDescription
     }
 
-    sendRequest({ modifiedEventData: eventData, eventId: eventId });
+    console.log("ID en front es: " + eventId);
+    console.log(eventData);
+
+    await sendRequest( eventId, eventData );
   } 
 
   return (

@@ -109,17 +109,18 @@ export async function addEvent(eventData) {
   return null;
 }
 
-export async function modifyEvent(modifiedEventData, eventId) {
+export async function modifyEvent(eventId, {eventData}) {
+  console.log("ID en modifyEvent es: " + eventId);
   const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`, {
     method: "PUT",
-    body: JSON.stringify(modifiedEventData, eventId),
+    body: JSON.stringify(eventData),
     headers: {
       "Content-Type": "application/json",
     },
   });
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "No se pudo crear el evento.");
+    throw new Error(data.message || "No se pudo modificar el evento.");
   }
   return null;
 }
