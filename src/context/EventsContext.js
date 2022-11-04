@@ -21,8 +21,6 @@ export const EventsContextProvider= ({ children }) => {
       setDataEventsContext(loadedEvents)
     }, []);
 
-    console.log(dataEventsContext);
-
     return (
         <EventsContext.Provider value={{
             dataEventsContext,

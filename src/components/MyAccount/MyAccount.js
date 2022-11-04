@@ -12,14 +12,12 @@ const MyAccount = () => {
 
     const { sendRequest, status, data: loadedUser, error } = useHttp(getSingleUser, true);
 
-    useEffect(() => {
-        sendRequest('-NG2oBHTG4oy9a7v0D6S');
-      }, [sendRequest]);
-
-    console.log(loadedUser);
+    // useEffect(() => {
+    //     sendRequest('-NG2oBHTG4oy9a7v0D6S');
+    //   }, [sendRequest]);
 
 
-    const { user } = useAuth();
+    const { user, role, name, surname } = useAuth();
 
     const { contextTheme } = useContext(ThemeContext);
 
@@ -36,12 +34,12 @@ const MyAccount = () => {
         console.log(error);
       }
 
-      if (status === "pending") {
-        return <p>Cargando usuario...</p>;
-      }
+    //   if (status === "pending") {
+    //     return <p>Cargando usuario...</p>;
+    //   }
   return (
     <section id={contextTheme}>
-        <div className='container vh-100'>
+        <div className='container vh-100 account '>
             <span>
                 <h1>Mi cuenta</h1>
             </span>
@@ -49,10 +47,13 @@ const MyAccount = () => {
                 <h4>{user.email}</h4>
             </div>
             <div className='user-name'>
-                <h5>Nombre: {loadedUser.name}</h5>
+                <h5>Nombre: {name}</h5>
             </div>
             <div className='user-surname'>
-                <h5>Apellido: {loadedUser.surname}</h5>
+                <h5>Apellido: {surname}</h5>
+            </div>
+            <div className='user-role'>
+                <h5>Rol: {role}</h5>
             </div>
             <div>
                 <button onClick={() => navigate('/my-account/modify')} >Modificar cuenta</button>

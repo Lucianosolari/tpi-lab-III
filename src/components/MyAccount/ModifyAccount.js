@@ -10,9 +10,7 @@ import { modifyUser } from '../../lib/api';
 const ModifyAccount = () => {
     const { contextTheme } = useContext(ThemeContext);
 
-    const { name, surname } = useAuth();
-
-    console.log("El nombre del usuario es " + name);
+    const { name, surname, user } = useAuth();
 
     const [inputNewNameValue, setInputNewNameValue] = useState(name);
     const [inputNewSurnameValue, setInputNewSurnameValue] = useState(surname);
@@ -33,11 +31,11 @@ const ModifyAccount = () => {
         event.preventDefault();
 
         const userData = {
+            email: user.email,
+            password: user.password,
             name: inputNewNameValue,
             surname: inputNewSurnameValue,
         }
-
-        console.log(userData);
 
         await sendRequest({ userData, userId: '-NG2oBHTG4oy9a7v0D6S' }); //ID pendiente
         if (status === 'pending') {

@@ -70,8 +70,6 @@ export function AuthProvider({ children }) {
     });
   };
 
-  console.log(role);
-
   const triggerComparison = (user) => {
     compareUser(user);
   };

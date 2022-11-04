@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import { useContext, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -6,7 +5,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import "./SignUp.css";
 
 const SignUp = ({ onAddUser }) => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const { contextTheme } = useContext(ThemeContext);
   const [user, setUser] = useState({
     name: "",
     surname: "",

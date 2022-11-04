@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, Outlet } from "react-router-dom";
 
 import useHttp from "../../hooks/use-http";
@@ -29,7 +29,7 @@ const EventDetail = () => {
     return <p className="centered">{error}</p>;
   }
 
-  if (!loadedEvent.date) {
+  if (!loadedEvent) {
     return <p>No hay evento</p>;
   }
 
