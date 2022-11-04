@@ -5,6 +5,7 @@ import useHttp from '../../hooks/use-http';
 import { modifyEvent } from "../../lib/api";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useContext } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 const ModifyEventsForm = () => {
   const { contextTheme } = useContext(ThemeContext);
@@ -17,6 +18,8 @@ const ModifyEventsForm = () => {
 
   const params = useParams();
   const { eventId } = params;
+
+  const { role } = useAuth();
 
   const navigate = useNavigate();
 
@@ -46,6 +49,8 @@ const ModifyEventsForm = () => {
 
   return (
     <>
+    {role === 'user' && <h1>Los usuarios no pueden acceder a esta página!!</h1>}
+      {role === 'admin' && 
       <section id={contextTheme}>
         <div className='container vh-100'>
           <div
@@ -141,7 +146,7 @@ const ModifyEventsForm = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
     </>
   )
 }

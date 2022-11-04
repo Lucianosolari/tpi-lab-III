@@ -22,7 +22,7 @@ const AllEvents = () => {
     sendRequest();
   }, [sendRequest]);
 
-  const { loading, name } = useAuth();
+  const { loading, name, user } = useAuth();
 
   if (status === "pending") {
     return <p>Cargando eventos...</p>;
@@ -36,7 +36,7 @@ const AllEvents = () => {
     return <p>No hay eventos</p>;
   }
 
-  if (loading) return <h1>Cargando...</h1>;
+  if (loading || !user) return <h1>Cargando...</h1>;
 
   return (
     <section id={contextTheme}>
