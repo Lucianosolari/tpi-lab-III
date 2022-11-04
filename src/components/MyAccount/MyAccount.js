@@ -1,13 +1,23 @@
 import React from 'react'
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'
+import { removeUser } from '../../lib/api';
 
 import './MyAccount.css'
 
-const MyAccount = () => {
+const MyAccount = (props) => {
     const { name, surname, user } = useAuth();
     const [modifyName, setModifyName] = useState(false);
     const [modifySurname, setModifySurname] = useState(false);
+
+    const params = useParams();
+
+    const { userId } = params;
+
+    const removeUserFromDatabase = async () => {
+        await removeUser(userId); // traer userId con params, como en EventsInscription
+      }
   return (
     <>
         <span>

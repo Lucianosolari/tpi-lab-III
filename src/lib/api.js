@@ -60,10 +60,10 @@ export async function getSingleEvent(eventId) {
   return loadedEvent;
 }
 
-export async function addUser(quoteData) {
+export async function addUser(userData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/user.json`, {
     method: "POST",
-    body: JSON.stringify(quoteData),
+    body: JSON.stringify(userData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -72,6 +72,23 @@ export async function addUser(quoteData) {
 
   if (!response.ok) {
     throw new Error(data.message || "No se pudo crear el usuario.");
+  }
+
+  return null;
+}
+
+export async function removeUser(userId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user/${userId}.json`, {
+    method: "DELETE",
+    body: JSON.stringify(userId),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo eliminar el usuario.");
   }
 
   return null;
