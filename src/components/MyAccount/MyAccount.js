@@ -8,6 +8,10 @@ import './MyAccount.css'
 
 const MyAccount = (props) => {
     const { name, surname, user } = useAuth();
+
+    const [inputNameValue, setInputNameValue] = useState("");
+    const [inputSurnameValue, setInputSurnameValue] = useState("");
+
     const [modifyName, setModifyName] = useState(false);
     const [modifySurname, setModifySurname] = useState(false);
 
@@ -15,9 +19,25 @@ const MyAccount = (props) => {
 
     const { userId } = params;
 
-    const removeUserFromDatabase = async () => {
+    const onRemoveUser= async () => {
         await removeUser(userId); // traer userId con params, como en EventsInscription
       }
+
+    const onChangeNameInput = (event) => {
+        setInputNameValue(event.target.value);
+    }
+
+    const onChangeSurnameInput = (event) => {
+        setInputSurnameValue(event.target.value);
+    }
+
+    const onSubmitNewUserName = async () => {
+
+    }
+
+    const onSubmitNewUserSurname = async () => {
+
+    }
   return (
     <>
         <span>
@@ -39,17 +59,17 @@ const MyAccount = (props) => {
         </div>
         <div className='forms'>
             {modifyName && 
-            <form>
+            <form onSubmit={onSubmitNewUserName}>
                 <label>Nuevo nombre:</label>
-                <input type='text'></input>
+                <input type='text' onChange={onChangeNameInput} value={inputNameValue}></input>
                 <button onClick={() => setModifyName(false)}>Cancelar</button>
                 <button>Aceptar</button>
             </form>
             }
             {modifySurname && 
-            <form>
+            <form onSubmit={onSubmitNewUserSurname}>
                 <label>Nuevo apellido:</label>
-                <input type='text'></input>
+                <input type='text' onChange={onChangeSurnameInput} value={inputSurnameValue}></input>
                 <button onClick={() => setModifySurname(false)}>Cancelar</button>
                 <button>Aceptar</button>
             </form>
