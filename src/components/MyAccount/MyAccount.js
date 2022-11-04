@@ -1,7 +1,9 @@
 import React from 'react'
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'
+import { ThemeContext } from '../../context/ThemeContext';
 import { removeUser } from '../../lib/api';
 
 import './MyAccount.css'
@@ -14,6 +16,8 @@ const MyAccount = (props) => {
 
     const [modifyName, setModifyName] = useState(false);
     const [modifySurname, setModifySurname] = useState(false);
+
+    const { contextTheme } = useContext(ThemeContext);
 
     const params = useParams();
 
@@ -39,43 +43,45 @@ const MyAccount = (props) => {
 
     }
   return (
-    <>
-        <span>
-            <h1>Mi cuenta</h1>
-        </span>
-        <div className='user.email'>
-            <h4>{user.email}</h4>
+    <section id={contextTheme}>
+        <div className='container vh-100'>
+            <span>
+                <h1>Mi cuenta</h1>
+            </span>
+            <div className='user.email'>
+                <h4>{user.email}</h4>
+            </div>
+            <div className='user-name'>
+                <h5>Nombre: {name}</h5>
+                <button className='btn btn-secondary' onClick={() => setModifyName(true)}>Modificar</button>
+            </div>
+            <div className='user-surname'>
+                <h5>Apellido: {surname}</h5>
+                <button className='btn btn-secondary' onClick={() => setModifySurname(true)}>Modificar</button>
+            </div>
+            <div>
+                <button>BORRAR CUENTA</button>
+            </div>
+            <div className='forms'>
+                {modifyName && 
+                <form onSubmit={onSubmitNewUserName}>
+                    <label>Nuevo nombre:</label>
+                    <input type='text' onChange={onChangeNameInput} value={inputNameValue}></input>
+                    <button onClick={() => setModifyName(false)}>Cancelar</button>
+                    <button>Aceptar</button>
+                </form>
+                }
+                {modifySurname && 
+                <form onSubmit={onSubmitNewUserSurname}>
+                    <label>Nuevo apellido:</label>
+                    <input type='text' onChange={onChangeSurnameInput} value={inputSurnameValue}></input>
+                    <button onClick={() => setModifySurname(false)}>Cancelar</button>
+                    <button>Aceptar</button>
+                </form>
+                }
+            </div>
         </div>
-        <div className='user-name'>
-            <h5>Nombre: {name}</h5>
-            <button className='btn btn-secondary' onClick={() => setModifyName(true)}>Modificar</button>
-        </div>
-        <div className='user-surname'>
-            <h5>Apellido: {surname}</h5>
-            <button className='btn btn-secondary' onClick={() => setModifySurname(true)}>Modificar</button>
-        </div>
-        <div>
-            <button>BORRAR CUENTA</button>
-        </div>
-        <div className='forms'>
-            {modifyName && 
-            <form onSubmit={onSubmitNewUserName}>
-                <label>Nuevo nombre:</label>
-                <input type='text' onChange={onChangeNameInput} value={inputNameValue}></input>
-                <button onClick={() => setModifyName(false)}>Cancelar</button>
-                <button>Aceptar</button>
-            </form>
-            }
-            {modifySurname && 
-            <form onSubmit={onSubmitNewUserSurname}>
-                <label>Nuevo apellido:</label>
-                <input type='text' onChange={onChangeSurnameInput} value={inputSurnameValue}></input>
-                <button onClick={() => setModifySurname(false)}>Cancelar</button>
-                <button>Aceptar</button>
-            </form>
-            }
-        </div>
-    </>
+    </section>
   )
 }
 

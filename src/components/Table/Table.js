@@ -1,6 +1,8 @@
 import React from "react";
+import { useContext } from "react";
 import DataGrid from "react-data-grid";
 import { useAuth } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Table = () => {
   const columns = [
@@ -10,6 +12,8 @@ const Table = () => {
     { key: "category", name: "CATEGORIA" },
     { key: "ranking", name: "CLASIFICACIÓN" },
   ];
+
+  const { contextTheme } = useContext(ThemeContext);
   
   const {loading} = useAuth();
 
@@ -23,9 +27,13 @@ const Table = () => {
   if (loading) return <h1>Cargando página principal...</h1>
 
   return (
-    <div>
-      <DataGrid columns={columns} rows={rows} />
-    </div>
+    <section id={contextTheme}>
+      <div className="container vh-100">
+        <div>
+          <DataGrid columns={columns} rows={rows} />
+        </div>
+      </div>
+    </section>
   );
 };
 

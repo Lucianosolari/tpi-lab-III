@@ -10,8 +10,7 @@ import EventsList from "./EventsList";
 import "./AllEvents.css";
 
 const AllEvents = () => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
-  const { user } = useAuth();
+  const { contextTheme } = useContext(ThemeContext);
   const {
     sendRequest,
     status,
@@ -41,10 +40,14 @@ const AllEvents = () => {
 
   return (
     <section id={contextTheme}>
-      <h2 className={ThemeContext} id="welcome">
-        Bienvenido {name}, disfruta la página!!
-      </h2>
-      <EventsList events={loadedEvents} />;
+      <section className="container vh-100">
+        <div className="px-4 py-5 px-md-5 text-center ">
+          <h2 className={ThemeContext} id="welcome">
+            Bienvenido {name}, disfruta la página!!
+          </h2>
+          <EventsList events={loadedEvents} />
+      </div>
+      </section>
     </section>
   );
 };
