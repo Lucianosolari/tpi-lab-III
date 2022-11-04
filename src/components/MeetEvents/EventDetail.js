@@ -34,10 +34,10 @@ const EventDetail = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <SingleEvent eventSingle={loadedEvent} />
       <Outlet />
-    </Fragment>
+    </>
   );
 };
 

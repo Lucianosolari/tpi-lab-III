@@ -15,9 +15,9 @@ const SingleEvent = ({ eventSingle }) => {
             <p>{eventSingle.organizer}</p>
             <p>{eventSingle.location}</p>
             <p>{eventSingle.description}</p>
-            <EventsInscription></EventsInscription>
           </EventsCard>
         </div>
+        <EventsInscription/>
       </section>
     </section>
   );

@@ -92,9 +92,24 @@ export async function addEvent(eventData) {
   return null;
 }
 
+export async function modifyEvent(eventData, eventId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`, {
+    method: "PUT",
+    body: JSON.stringify(eventData, eventId),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo crear el evento.");
+  }
+  return null;
+}
+
 export async function removeEvent(eventId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/event.json`, {
-    method: "POST",
+  const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`, {
+    method: "DELETE",
     body: JSON.stringify(eventId),
     headers: {
       "Content-Type": "application/json",
