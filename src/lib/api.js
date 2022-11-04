@@ -109,10 +109,10 @@ export async function addEvent(eventData) {
   return null;
 }
 
-export async function modifyEvent(eventData, eventId) {
+export async function modifyEvent(modifiedEventData, eventId) {
   const response = await fetch(`${FIREBASE_DOMAIN}/event/${eventId}.json`, {
     method: "PUT",
-    body: JSON.stringify(eventData, eventId),
+    body: JSON.stringify(modifiedEventData, eventId),
     headers: {
       "Content-Type": "application/json",
     },

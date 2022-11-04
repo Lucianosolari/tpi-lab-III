@@ -1,24 +1,19 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
-import { addUserToEvent, modifyEvent, removeEvent } from "../../lib/api";
+import { addUserToEvent, removeEvent } from "../../lib/api";
 
 import { useAuth } from "../../context/AuthContext";
 
 import './EventsInscription.css'
-import { useState } from "react";
 
-const EventsInscription = (props) => {
+const EventsInscription = () => {
   const { user, role } = useAuth();
-
-  const [editEvent, setEditEvent] = useState(false);
 
   const params = useParams();
   const { eventId } = params;
 
   const { sendRequest, status, error } = useHttp(addUserToEvent);
-
-  const { onAddedComment } = props;
 
   const navigate = useNavigate();
 
@@ -31,9 +26,9 @@ const EventsInscription = (props) => {
       alert("Ha ocurrido un error.");
       navigate('/events');
     }
-  }, [status, error, onAddedComment]);
+  }, [status, error, navigate]);
 
-  const submitFormHandler = (event) => {
+  const submitInscriptionHandler = (event) => {
     event.preventDefault();
     if (role === 'user') {
       sendRequest({ userData: { email: user.email }, eventId: eventId });
@@ -45,32 +40,17 @@ const EventsInscription = (props) => {
     navigate('/events');
   }
 
-  const onEditEvent = async () => {
-    await modifyEvent(eventId)
-  }
-
   return (
     <>
-      <form onSubmit={submitFormHandler}>
+      <form onSubmit={submitInscriptionHandler}>
         {status === "pending" && <div className="centered">Cargando</div>}
 
         <div>
           {role === 'user' && <button className="btn btn-primary ">Inscribirme</button>}
-          {role === 'admin' && <button className="btn btn-primary" id="event-button" type="button" onClick={() => setEditEvent(true)}>Modificar evento</button>}
+          {role === 'admin' && <button className="btn btn-primary" id="event-button" type="button" onClick={() => navigate(`/modify-event/${eventId}`)}>Modificar evento</button>}
           {role === 'admin' && <button className="btn btn-primary" id="event-button" onClick={removeEventFromDatabase} type='button'>Borrar evento</button>}
         </div>
       </form>
-      {editEvent && 
-      <>
-        <div>
-          <label>Fecha</label>
-          <input type="date"></input>
-        </div>
-        <div>
-          <button onClick={onEditEvent}>Modificar fecha</button>
-          <button onClick={() => setEditEvent(false)}>Cancelar</button>
-        </div>
-      </>}
     </>
     
   );
