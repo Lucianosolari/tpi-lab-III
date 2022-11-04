@@ -60,6 +60,28 @@ export async function getSingleEvent(eventId) {
   return loadedEvent;
 }
 
+export async function getEventsWithParticipants() {
+  const response = await fetch(`${FIREBASE_DOMAIN}/eventParticipants.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo cargar los eventos.");
+  }
+
+  const transformedEvents = [];
+
+  for (const key in data) {
+    const eventObj = {
+      id: key,
+      ...data[key],
+    };
+
+    transformedEvents.push(eventObj);
+  }
+
+  return transformedEvents;
+}
+
 export async function getSingleUser(userId) {
   const response = await fetch(`${FIREBASE_DOMAIN}/user/${userId}.json`);
   const data = await response.json();
@@ -198,6 +220,46 @@ export async function addUserToEvent(requestData) {
     {
       method: "POST",
       body: JSON.stringify(requestData.userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo inscribir al usuario en el evento.");
+  }
+
+  return { userId: data.name };
+}
+
+export async function addEventToUser(requestData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/user/${requestData.userId}/events/${requestData.eventId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(requestData.eventId),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo inscribir al usuario en el evento.");
+  }
+
+  return { userId: data.name };
+}
+
+export async function getUserEvents(requestData) {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/user/${requestData.userId}/events/${requestData.eventId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(requestData.eventId),
       headers: {
         "Content-Type": "application/json",
       },

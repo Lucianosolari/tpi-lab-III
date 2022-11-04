@@ -10,7 +10,8 @@ import { modifyUser } from '../../lib/api';
 const ModifyAccount = () => {
     const { contextTheme } = useContext(ThemeContext);
 
-    const { name, surname, user, idFromDatabase } = useAuth();
+    const { name, surname, user, idFromDatabase} = useAuth();
+    console.log("ID en modify account" + idFromDatabase);
 
     const [inputNewNameValue, setInputNewNameValue] = useState(name);
     const [inputNewSurnameValue, setInputNewSurnameValue] = useState(surname);
@@ -42,6 +43,7 @@ const ModifyAccount = () => {
             return <h1>Cargando cambio de usuario</h1>
         }
         navigate(`/my-account/${idFromDatabase}`);
+
     }
 
   return (

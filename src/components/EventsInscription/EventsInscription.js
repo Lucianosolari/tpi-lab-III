@@ -1,26 +1,26 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
-import { addUserToEvent, removeEvent } from "../../lib/api";
+import { addEventToUser, removeEvent } from "../../lib/api";
 
 import { useAuth } from "../../context/AuthContext";
 
 import './EventsInscription.css'
 
 const EventsInscription = () => {
-  const { user, role } = useAuth();
 
   const params = useParams();
-  const { eventId } = params;
+  const { userId, eventId } = params;
+  const { role } = useAuth();
 
-  const { sendRequest, status, error } = useHttp(addUserToEvent);
+  const { sendRequest, status, error } = useHttp(addEventToUser);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (status === "completed" && !error) {
       alert("Se ha inscripto en el evento exitosamente!");
-      navigate('/events');
+      navigate(`/events/${eventId}`);
     }
     if (status === "completed" && error) {
       alert("Ha ocurrido un error.");
@@ -31,7 +31,7 @@ const EventsInscription = () => {
   const submitInscriptionHandler = (event) => {
     event.preventDefault();
     if (role === 'user') {
-      sendRequest({ userData: { email: user.email }, eventId: eventId });
+      sendRequest({ userId: userId, eventId: eventId });
     }
   };
 

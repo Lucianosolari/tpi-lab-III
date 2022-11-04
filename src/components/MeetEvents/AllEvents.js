@@ -21,7 +21,7 @@ const AllEvents = () => {
     sendRequest();
   }, [sendRequest]);
 
-  const { loading, name, user } = useAuth();
+  const { loading, user, name } = useAuth();
 
   if (status === "pending") {
     return <p>Cargando eventos...</p>;
@@ -38,16 +38,16 @@ const AllEvents = () => {
   if (loading || !user) return <h1>Cargando...</h1>;
     
   return (
-    <section id={contextTheme}>
-      <section className="container vh-100">
-        <div className="px-4 py-5 px-md-5 text-center ">
-          <h2 className={ThemeContext} id="welcome">
-            Bienvenido {user.email}, disfruta la página!!
-          </h2>
-          <EventsList events={loadedEvents} />
-      </div>
+      <section id={contextTheme}>
+        <section className="container vh-100">
+          <div className="px-4 py-5 px-md-5 text-center ">
+            <h2 className={ThemeContext} id="welcome">
+              Bienvenido {name}, disfruta la página!!
+            </h2>
+            <EventsList events={loadedEvents} />
+        </div>
+        </section>
       </section>
-    </section>
   );
 };
 
