@@ -1,8 +1,6 @@
-import React, { useContext, useRef } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import React, { useRef } from "react";
 
 const EventsForm = ({ onAddEvent }) => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
   const dateInputRef = useRef();
   const titleInputRef = useRef();
   const organizerInputRef = useRef();
@@ -29,7 +27,7 @@ const EventsForm = ({ onAddEvent }) => {
   }
   return (
     <>
-      <section id={contextTheme} className={ThemeContext}>
+      <section>
         <div
           className="px-4 py-5 px-md-5 text-center text-lg-start" /*style="background-color: hsl(0, 0%, 96%)"*/
         >

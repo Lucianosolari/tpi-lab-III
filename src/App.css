@@ -4,6 +4,7 @@
   background: hsla(0, 0%, 0%, 0.61);
   background: linear-gradient(to right, rgb(42, 37, 48), rgb(41, 102, 207));
   --bs-dark-rgb: 33, 37, 41;
+  color: white;
 }
 
 #Light {

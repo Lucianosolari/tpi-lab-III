@@ -4,17 +4,17 @@ import EventsCard from "../EventsCard/EventsCard";
 import EventsInscription from "../EventsInscription/EventsInscription";
 
 const SingleEvent = ({ eventSingle }) => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const { contextTheme } = useContext(ThemeContext);
   return (
     <section id={contextTheme}>
       <section className="container vh-100">
         <div className="px-4 py-5 px-md-5 text-center ">
           <EventsCard>
-            <p>{eventSingle.date}</p>
+            <p>Fecha: {eventSingle.date}</p>
             <p>{eventSingle.title}</p>
-            <p>{eventSingle.organizer}</p>
-            <p>{eventSingle.location}</p>
-            <p>{eventSingle.description}</p>
+            <p>Organiza: {eventSingle.organizer}</p>
+            <p>Ubicación: {eventSingle.location}</p>
+            <p>Descripción: {eventSingle.description}</p>
           </EventsCard>
         </div>
         <EventsInscription/>
