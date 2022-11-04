@@ -7,11 +7,9 @@ import { useAuth } from "../../context/AuthContext";
 
 import './EventsInscription.css'
 import { useState } from "react";
-import { useContext } from "react";
 
 const EventsInscription = (props) => {
   const { user, role } = useAuth();
-
 
   const [editEvent, setEditEvent] = useState(false);
 
