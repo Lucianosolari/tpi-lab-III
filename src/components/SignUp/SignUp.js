@@ -1,3 +1,4 @@
+import { set } from "firebase/database";
 import { useContext, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -33,21 +34,33 @@ const SignUp = ({ onAddUser }) => {
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
+    if (!nameInputRef.current.value) {
+      setError("Introduzca un nombre")
+      return
+    }
+    if (!surnameInputRef.current.value) {
+      setError("Introduzca un apellido");
+      return
+    }
+    if (!emailInputRef.current.value) {
+      setError("Introduzca un mail");
+      return
+    }
+    if (!passwordInputRef.current.value) {
+      setError("Introduzca una contraseña");
+    }
     try {
       await signUp(user.email, user.password);
-      navigate("/events");
 
       const enteredName = nameInputRef.current.value;
       const enteredSurname = surnameInputRef.current.value;
       const enteredEmail = emailInputRef.current.value;
-      const enteredPassword = passwordInputRef.current.value;
 
       onAddUser({
         role: "user",
         name: enteredName,
         surname: enteredSurname,
         email: enteredEmail,
-        password: enteredPassword,
       });
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

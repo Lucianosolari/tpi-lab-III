@@ -13,7 +13,7 @@ import { ThemeContext } from "../context/ThemeContext";
 const NavBar = () => {
   const { contextTheme, setContextTheme } = useContext(ThemeContext);
   const [checked, setChecked] = useState(false);
-  const { user, logout, loading, role } = useAuth();
+  const { user, logout, loading, role, idFromDatabase } = useAuth();
   const navigate = useNavigate();
   const logoutHandler = async () => {
     await logout();
@@ -44,7 +44,7 @@ const NavBar = () => {
         <Container fluid>
           <NavLink to="/events">Futuros eventos</NavLink>
           <NavLink to="/table">Resultados</NavLink>
-          <NavLink to="/my-account">Mi cuenta</NavLink>
+          <NavLink to={`/my-account/${idFromDatabase}`}>Mi cuenta</NavLink>
           {user && role === "admin" && (
             <Button onClick={addEventHandler}>Agregar evento</Button>
           )}

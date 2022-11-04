@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="/login/newuser" element={<NewUser />} />
 
       <Route
-        path="/my-account"
+        path="/my-account/:idFromDatabase"
         element={
           <ProtectedRoute>
             <MyAccount />

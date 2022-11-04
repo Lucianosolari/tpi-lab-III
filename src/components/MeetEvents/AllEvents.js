@@ -1,12 +1,11 @@
 import { useContext, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
-
-// import LoadingSpinner from '../components/UI/LoadingSpinner';
-// import NoQuotesFound from '../components/quotes/NoQuotesFound';
 import useHttp from "../../hooks/use-http";
 import { getAllEvents } from "../../lib/api";
+
 import EventsList from "./EventsList";
+
 import "./AllEvents.css";
 
 const AllEvents = () => {
@@ -37,13 +36,13 @@ const AllEvents = () => {
   }
 
   if (loading || !user) return <h1>Cargando...</h1>;
-
+    
   return (
     <section id={contextTheme}>
       <section className="container vh-100">
         <div className="px-4 py-5 px-md-5 text-center ">
           <h2 className={ThemeContext} id="welcome">
-            Bienvenido {name}, disfruta la página!!
+            Bienvenido {user.email}, disfruta la página!!
           </h2>
           <EventsList events={loadedEvents} />
       </div>

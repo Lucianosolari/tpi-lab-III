@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
@@ -23,6 +24,7 @@ export function AuthProvider({ children }) {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [idFromDatabase, setIdFromDatabase] = useState("");
 
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password)
@@ -57,6 +59,13 @@ export function AuthProvider({ children }) {
     console.log(error)
   });
 
+  const deleteFirebaseAccount = () => deleteUser(user)
+  .then(()=>{
+    setIsAuthenticated(false);
+  }).catch((error)=>{
+    console.log(error);
+  })
+
   const compareUser = async (user) => {
     const userData = await getAllUsers();
 
@@ -66,6 +75,7 @@ export function AuthProvider({ children }) {
         setName(loggedUser.name);
         setSurname(loggedUser.surname);
         setRole(loggedUser.role);
+        setIdFromDatabase(loggedUser.id)
       }
     });
   };
@@ -84,10 +94,9 @@ export function AuthProvider({ children }) {
     });
   }, []);
 
-
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, loading, user, role, name, surname, isAuthenticated }}
+      value={{ signUp, login, logout, deleteFirebaseAccount, loading, user, role, name, surname, isAuthenticated, idFromDatabase }}
     >
       {children}
     </authContext.Provider>

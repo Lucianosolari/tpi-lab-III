@@ -10,7 +10,7 @@ import { modifyUser } from '../../lib/api';
 const ModifyAccount = () => {
     const { contextTheme } = useContext(ThemeContext);
 
-    const { name, surname, user } = useAuth();
+    const { name, surname, user, idFromDatabase } = useAuth();
 
     const [inputNewNameValue, setInputNewNameValue] = useState(name);
     const [inputNewSurnameValue, setInputNewSurnameValue] = useState(surname);
@@ -32,16 +32,16 @@ const ModifyAccount = () => {
 
         const userData = {
             email: user.email,
-            password: user.password,
             name: inputNewNameValue,
             surname: inputNewSurnameValue,
+            role: 'user',
         }
 
-        await sendRequest({ userData, userId: '-NG2oBHTG4oy9a7v0D6S' }); //ID pendiente
+        await sendRequest({ userData, userId: idFromDatabase });
         if (status === 'pending') {
             return <h1>Cargando cambio de usuario</h1>
         }
-        navigate('/my-account');
+        navigate(`/my-account/${idFromDatabase}`);
     }
 
   return (

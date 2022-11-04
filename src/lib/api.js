@@ -194,7 +194,7 @@ export async function accessToEvent(eventId, userData) {
 
 export async function addUserToEvent(requestData) {
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/userEvent/${requestData.eventId}.json`,
+    `${FIREBASE_DOMAIN}/eventParticipants/${requestData.eventId}.json`,
     {
       method: "POST",
       body: JSON.stringify(requestData.userData),
