@@ -1,42 +1,27 @@
-import React, { useEffect } from 'react'
+import { useState } from 'react';
 import { useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'
 import { ThemeContext } from '../../context/ThemeContext';
-import useHttp from '../../hooks/use-http';
-import { getSingleUser, removeUser } from '../../lib/api';
+import { removeUser } from '../../lib/api';
 
 import './MyAccount.css'
 
 const MyAccount = () => {
 
-    const { sendRequest, status, data: loadedUser, error } = useHttp(getSingleUser, true);
+    const [deleteAccount, setDeleteAccount] = useState(false);
 
-    // useEffect(() => {
-    //     sendRequest('-NG2oBHTG4oy9a7v0D6S');
-    //   }, [sendRequest]);
-
-
-    const { user, role, name, surname } = useAuth();
+    const { deleteFirebaseAccount, user, role, name, surname, idFromDatabase } = useAuth();
 
     const { contextTheme } = useContext(ThemeContext);
 
     const navigate = useNavigate();
 
-    const params = useParams();
-    const { userId } = params;
-
-    const onRemoveUser= async () => {
-        await removeUser(userId); // traer userId con params, como en EventsInscription
+    const removeUserFromDatabase = async () => {
+        await removeUser(idFromDatabase);
+        await deleteFirebaseAccount(user);
+        navigate('/login');
       }
-
-      if (error) {
-        console.log(error);
-      }
-
-    //   if (status === "pending") {
-    //     return <p>Cargando usuario...</p>;
-    //   }
   return (
     <section id={contextTheme}>
         <div className='container vh-100 account '>
@@ -56,9 +41,15 @@ const MyAccount = () => {
                 <h5>Rol: {role}</h5>
             </div>
             <div>
-                <button onClick={() => navigate('/my-account/modify')} >Modificar cuenta</button>
-                <button>BORRAR CUENTA</button>
+                <button onClick={() => navigate('/my-account/modify')} className="btn btn-success">Modificar cuenta</button>
+                <button className='btn btn-danger'  onClick={() => setDeleteAccount(true)} >BORRAR CUENTA</button>
             </div>
+            {deleteAccount && 
+            <div>
+                <h2>¿Está seguro de que desea eliminar su cuenta? Esta acción es irreversible.</h2>
+                <button className='btn btn-danger' onClick={removeUserFromDatabase}>BORRAR</button>
+            </div>
+            }
         </div>
     </section>
   )
