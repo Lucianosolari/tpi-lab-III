@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import "./SignUp.css";
@@ -15,7 +15,7 @@ const SignUp = ({ onAddUser }) => {
 
   const [error, setError] = useState();
 
-  const { signUp, isAuthenticated } = useAuth();
+  const { signUp, isAuthenticated, apiError } = useAuth();
 
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -26,7 +26,6 @@ const SignUp = ({ onAddUser }) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  const navigate = useNavigate();
   if (isAuthenticated) {
     return <Navigate to='/events' replace />
   }
@@ -54,20 +53,15 @@ const SignUp = ({ onAddUser }) => {
       const enteredName = nameInputRef.current.value;
       const enteredSurname = surnameInputRef.current.value;
       const enteredEmail = emailInputRef.current.value;
-
-      onAddUser({
-        role: "user",
-        name: enteredName,
-        surname: enteredSurname,
-        email: enteredEmail,
-      });
+      if (!error && !apiError) {
+        onAddUser({
+          role: "user",
+          name: enteredName,
+          surname: enteredSurname,
+          email: enteredEmail,
+        });
+      }
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        setError("Correo ya utilizado.");
-      }
-      if (error.code === "auth/weak-password") {
-        setError("Contraseña inválida, debe tener al menos 6 caracteres.");
-      }
     }
   }
 
@@ -151,6 +145,7 @@ const SignUp = ({ onAddUser }) => {
                       </div>
                       <div className="form-check d-flex justify-content-center mb-4">
                         {error && <p>{error}</p>}
+                        {apiError && <p>{apiError}</p>}
                       </div>
                     </form>
                   </div>

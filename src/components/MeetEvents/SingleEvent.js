@@ -8,7 +8,7 @@ const SingleEvent = ({ eventSingle }) => {
   return (
     <section id={contextTheme}>
       <section className="container vh-100">
-        <div className="px-4 py-5 px-md-5 text-center ">
+        <div className="px-4 py-5 px-md-5 text-center single-event-card" >
           <EventsCard>
             <p>Fecha: {eventSingle.date}</p>
             <p>{eventSingle.title}</p>

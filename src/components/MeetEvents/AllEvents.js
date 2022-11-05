@@ -42,7 +42,7 @@ const AllEvents = () => {
         <section className="container vh-100">
           <div className="px-4 py-5 px-md-5 text-center ">
             <h2 className={ThemeContext} id="welcome">
-              Bienvenido {user.email}, disfruta la página!!
+              Bienvenido {name}, disfruta la página!!
             </h2>
             <EventsList events={loadedEvents} />
         </div>

@@ -25,13 +25,21 @@ export function AuthProvider({ children }) {
   const [surname, setSurname] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [idFromDatabase, setIdFromDatabase] = useState("");
+  const [apiError, setApiError] = useState();
 
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
+      setApiError("");
       setIsAuthenticated(true);
     }).catch((error)=>{
-      console.log("El error es " + error);
+      setApiError("");
+      if (error.code === 'auth/email-already-in-use') {
+        setApiError('Correo ya utilizado');
+      }
+      if (error.code === 'auth/weak-password') {
+        setApiError('Contraseña débil, debe tener al menos 6 caracteres.')
+      }
     })
 
 
@@ -95,7 +103,7 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, deleteFirebaseAccount, loading, user, role, idFromDatabase, name, surname, isAuthenticated}}
+      value={{ signUp, login, logout, deleteFirebaseAccount, loading, user, role, idFromDatabase, name, surname, isAuthenticated, apiError, setApiError}}
     >
       {children}
     </authContext.Provider>
