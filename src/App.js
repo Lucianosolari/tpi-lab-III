@@ -15,7 +15,6 @@ import NewUser from "./user/NewUser";
 import CreateEvents from "./components/CreateEvents/CreateEvents";
 
 import AllEvents from "./components/MeetEvents/AllEvents";
-import { LoadSwimmer } from "./components/LoadSwimmer/LoadSwimmer";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import EventDetail from "./components/MeetEvents/EventDetail";
 import MyAccount from "./components/MyAccount/MyAccount";
@@ -73,15 +72,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="load-swimmer"
-        element={
-          <ProtectedRoute>
-            <LoadSwimmer />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/events/:userId"
+        path="/events"
         element={
           <ProtectedRoute>
             <AllEvents />
@@ -89,7 +80,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/event/:userId/:eventId"
+        path="/event/:eventId"
         element={
           <ProtectedRoute>
             <EventDetail />

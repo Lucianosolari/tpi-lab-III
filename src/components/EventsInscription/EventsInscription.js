@@ -7,11 +7,11 @@ import { useAuth } from "../../context/AuthContext";
 
 import './EventsInscription.css'
 
-const EventsInscription = () => {
+const EventsInscription = ({ date, title, organizer, location, description }) => {
 
   const params = useParams();
-  const { userId, eventId } = params;
-  const { role } = useAuth();
+  const { eventId } = params;
+  const { role, idFromDatabase } = useAuth();
 
   const { sendRequest, status, error } = useHttp(addEventToUser);
 
@@ -20,18 +20,26 @@ const EventsInscription = () => {
   useEffect(() => {
     if (status === "completed" && !error) {
       alert("Se ha inscripto en el evento exitosamente!");
-      navigate(`/events/${eventId}`);
+      navigate(`/events`);
     }
     if (status === "completed" && error) {
       alert("Ha ocurrido un error.");
       navigate('/events');
     }
-  }, [status, error, navigate]);
+  }, [status, error, navigate, eventId]);
+
+  const userEventData = {
+    userEventDate: date,
+    userEventTitle: title,
+    userEventOrganizer: organizer,
+    userEventLocation: location,
+    userEventDescription : description
+  }
 
   const submitInscriptionHandler = (event) => {
     event.preventDefault();
     if (role === 'user') {
-      sendRequest({ userId: userId, eventId: eventId });
+      sendRequest({userEventData, userId: idFromDatabase, eventId: eventId });
     }
   };
 

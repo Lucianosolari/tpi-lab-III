@@ -15,11 +15,11 @@ const Login = () => {
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, idFromDataBase } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
   if (isAuthenticated) {
-    return <Navigate to='/events' replace />
+    return <Navigate to={`/events`} replace />
   }
 
   const handleChange = (event) => {
