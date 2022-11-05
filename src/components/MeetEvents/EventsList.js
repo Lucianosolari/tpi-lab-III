@@ -6,7 +6,7 @@ import FutureEvents from "./FutureEvents";
 
 const EventList = ({ events }) => {
   return (
-    <Fragment>
+    <>
       <section className="row d-flex justify-content-center align-items-center h-100">
         <ul className="events-list">
           {events.map((meet) => (
@@ -21,7 +21,7 @@ const EventList = ({ events }) => {
           ))}
         </ul>
       </section>
-    </Fragment>
+    </>
   );
 };
 export default EventList;

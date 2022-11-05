@@ -42,7 +42,7 @@ const NavBar = () => {
         id={contextTheme}
       >
         <Container fluid>
-          <NavLink to={`/events/${idFromDatabase}`}>Futuros eventos</NavLink>
+          <NavLink to={`/events`}>Futuros eventos</NavLink>
           {role === 'user' && <NavLink to={`/user-events/${idFromDatabase}`}>Mis eventos</NavLink>}
           <NavLink to={`/my-account/${idFromDatabase}`}>Mi cuenta</NavLink>
           {user && role === "admin" && (

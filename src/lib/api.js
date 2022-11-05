@@ -60,12 +60,12 @@ export async function getSingleEvent(eventId) {
   return loadedEvent;
 }
 
-export async function getEventsWithParticipants() {
-  const response = await fetch(`${FIREBASE_DOMAIN}/eventParticipants.json`);
+export async function getEventsWithParticipants(requestData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user/${requestData.userId}/events.json`);
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "No se pudo cargar los eventos.");
+    throw new Error(data.message || "No se pudo cargar los eventos del usuario.");
   }
 
   const transformedEvents = [];
@@ -239,7 +239,7 @@ export async function addEventToUser(requestData) {
     `${FIREBASE_DOMAIN}/user/${requestData.userId}/events/${requestData.eventId}.json`,
     {
       method: "POST",
-      body: JSON.stringify(requestData.eventId),
+      body: JSON.stringify(requestData.userEventData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -256,7 +256,7 @@ export async function addEventToUser(requestData) {
 
 export async function getUserEvents(requestData) {
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/user/${requestData.userId}/events/${requestData.eventId}.json`,
+    `${FIREBASE_DOMAIN}/user/${requestData.userId}/events.json`,
     {
       method: "POST",
       body: JSON.stringify(requestData.eventId),

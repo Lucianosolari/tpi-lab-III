@@ -73,7 +73,9 @@ export function AuthProvider({ children }) {
         setName(loggedUser.name);
         setSurname(loggedUser.surname);
         setRole(loggedUser.role);
-        setIdFromDatabase(loggedUser.id)
+        setTimeout(() => {
+          setIdFromDatabase(loggedUser.id)
+        }, );
       }
     });
   };
@@ -94,7 +96,7 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ signUp, login, logout, deleteFirebaseAccount, loading, user, role, name, surname, isAuthenticated, idFromDatabase }}
+      value={{ signUp, login, logout, deleteFirebaseAccount, loading, user, role, idFromDatabase, name, surname, isAuthenticated}}
     >
       {children}
     </authContext.Provider>
