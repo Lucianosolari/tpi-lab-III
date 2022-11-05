@@ -45,7 +45,6 @@ const EventsForm = ({ onAddEvent }) => {
                               id="date"
                               name="date"
                               className="form-control"
-                              //onChange={handleChange}
                               ref={dateInputRef}
                             />
                             <label className="form-label" htmlFor="date">
@@ -60,7 +59,6 @@ const EventsForm = ({ onAddEvent }) => {
                               id="title"
                               name="title"
                               className="form-control"
-                              //onChange={handleChange}
                               ref={titleInputRef}
                             />
                             <label className="form-label" htmlFor="title">
@@ -76,7 +74,6 @@ const EventsForm = ({ onAddEvent }) => {
                           name="organizer"
                           id="organizer"
                           className="form-control"
-                          //onChange={handleChange}
                           ref={organizerInputRef}
                         />
                         <label className="form-label" htmlFor="organizer">
@@ -91,7 +88,6 @@ const EventsForm = ({ onAddEvent }) => {
                           name="location"
                           className="form-control"
                           ref={locationInputRef}
-                          //onChange={handleChange}
                         />
                         <label className="form-label" htmlFor="location">
                           Ubicación
@@ -104,7 +100,6 @@ const EventsForm = ({ onAddEvent }) => {
                           name="description"
                           className="form-control"
                           ref={descriptionInputRef}
-                          //onChange={handleChange}
                         />
                         <label className="form-label" htmlFor="description">
                           Descripción

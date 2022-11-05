@@ -43,8 +43,8 @@ const NavBar = () => {
       >
         <Container fluid>
           <NavLink to={`/events`}>Futuros eventos</NavLink>
-          {role === 'user' && <NavLink to={`/user-events/${idFromDatabase}`}>Mis eventos</NavLink>}
-          <NavLink to={`/my-account/${idFromDatabase}`}>Mi cuenta</NavLink>
+          {role === 'user' && <NavLink to={`/user-events`}>Mis eventos</NavLink>}
+          <NavLink to={`/my-account`}>Mi cuenta</NavLink>
           {user && role === "admin" && (
             <Button onClick={addEventHandler}>Agregar evento</Button>
           )}

@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="/login/newuser" element={<NewUser />} />
 
       <Route
-        path="/my-account/:userId"
+        path="/my-account"
         element={
           <ProtectedRoute>
             <MyAccount />
@@ -48,7 +48,7 @@ const router = createBrowserRouter(
       />
 
       <Route
-        path="/user-events/:userId"
+        path="/user-events"
         element={
           <ProtectedRoute>
             <UserEvents/>
