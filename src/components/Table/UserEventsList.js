@@ -1,8 +1,6 @@
 import React from 'react'
-import UserFutureEvents from './UserFutureEvents'
 
 const UserEventsList = ({ loadedUserEvents }) => {
-  console.log(loadedUserEvents);
   return (
     <>
       <section className="row d-flex justify-content-center align-items-center h-100">

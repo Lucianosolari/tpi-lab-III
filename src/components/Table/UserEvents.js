@@ -1,4 +1,3 @@
-import { stringify } from '@firebase/util';
 import React, { useEffect } from 'react'
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
@@ -14,11 +13,11 @@ const UserEvents = () => {
   const params = useParams();
   const {userId} = params;
 
+  const {name, surname, role} = useAuth();
+
   const {
     sendRequest,
-    status,
     data: loadedEvents,
-    error,
   } = useHttp(getEventsWithParticipants, true);
 
   useEffect(() => {
@@ -28,11 +27,20 @@ const UserEvents = () => {
   const loadedUserEvents = loadedEvents;
 
   return (
-    <section id={contextTheme}>
-      <div className='container vh-100'>
-        <UserEventsList loadedUserEvents={loadedUserEvents} />
-      </div>
-    </section>
+    <>
+      {role === 'user' &&
+      <section id={contextTheme}>
+        <div className='container vh-100'>
+          <h3>Eventos en los que {name} {surname} está inscripto:</h3>
+          <UserEventsList loadedUserEvents={loadedUserEvents} />
+        </div>
+      </section>
+      }
+      {role === 'admin' && 
+        <h3>No puede estar inscripto a eventos, sólo usuarios.</h3>
+      }
+      
+    </>
   )
 }
 

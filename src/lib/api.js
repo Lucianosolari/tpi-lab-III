@@ -115,6 +115,23 @@ export async function addUser(userData) {
   return null;
 }
 
+export async function addUserWithEvent(userData) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/user/${userData.userId}.json`, {
+    method: "PUT",
+    body: JSON.stringify(userData.userData, userData.userEventData,),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo cargar el usuario con evento.");
+  }
+
+  return null;
+}
+
 export async function modifyUser(requestData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/user/${requestData.userId}.json`, {
     method: "PUT",

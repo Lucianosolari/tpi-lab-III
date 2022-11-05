@@ -1,4 +1,3 @@
-import { set } from "firebase/database";
 import { useContext, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -90,7 +89,6 @@ const SignUp = ({ onAddUser }) => {
                               id="name"
                               name="name"
                               className="form-control"
-                              //onChange={handleChange}
                               ref={nameInputRef}
                             />
                             <label className="form-label" htmlFor="name">
@@ -105,7 +103,6 @@ const SignUp = ({ onAddUser }) => {
                               id="surname"
                               name="surname"
                               className="form-control"
-                              //onChange={handleChange}
                               ref={surnameInputRef}
                             />
                             <label className="form-label" htmlFor="surname">

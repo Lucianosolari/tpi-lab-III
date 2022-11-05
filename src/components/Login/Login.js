@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
 
 const Login = () => {
-  const { contextTheme, setContextTheme } = useContext(ThemeContext);
+  const { contextTheme } = useContext(ThemeContext);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -15,7 +15,7 @@ const Login = () => {
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
-  const { login, isAuthenticated, idFromDataBase } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
   if (isAuthenticated) {
