@@ -45,9 +45,9 @@ const MyAccount = () => {
                 <button className='btn btn-danger'  onClick={() => setDeleteAccount(true)} >BORRAR CUENTA</button>
             </div>
             {deleteAccount && 
-            <div>
+            <div className='confirm-delete'>
                 <h2>¿Está seguro de que desea eliminar su cuenta? Esta acción es irreversible.</h2>
-                <button className='btn btn-danger' onClick={removeUserFromDatabase}>BORRAR</button>
+                <button className='btn btn-danger' onClick={removeUserFromDatabase} id="confirm-delete-button">BORRAR</button>
             </div>
             }
         </div>

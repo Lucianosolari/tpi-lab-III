@@ -3,6 +3,8 @@ import { ThemeContext } from "../../context/ThemeContext";
 import EventsCard from "../EventsCard/EventsCard";
 import EventsInscription from "../EventsInscription/EventsInscription";
 
+import './SingleEvent.css'
+
 const SingleEvent = ({ eventSingle }) => {
   const { contextTheme } = useContext(ThemeContext);
   return (
